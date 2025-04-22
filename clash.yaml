@@ -112,10 +112,9 @@ FallBack: &FallBack {type: fallback, interval: 6, lazy: true, url: 'http://www.g
 LoadBalance: &LoadBalance {type: load-balance, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
 # 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用直连策略]
 RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml, proxy: DIRECT}
-# 锚点 - 节点订阅的参数 [每小时更新一次订阅节点，每 6 秒一次健康检查]
-NodeParam: &NodeParam {type: http, interval: 3600, health-check: {enable: true, url: 'http://www.google.com/blank.html', interval: 6}}
 
-# 锚点 - 节点订阅
+# 锚点 - 节点订阅 & 节点订阅的参数 [每小时更新一次订阅节点，每 6 秒一次健康检查]
+NodeParam: &NodeParam {type: http, interval: 3600, health-check: {enable: true, url: 'http://www.google.com/blank.html', interval: 6}}
 proxy-providers:
   节点名称:
     url: '节点地址'
@@ -159,9 +158,8 @@ proxy-groups:
   - {name: 🎛美国负载均衡, <<: *LoadBalance, filter: *FilterUS}
 
 
-
+  - {name: AI服务, type: select, proxies: [代理节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
   - {name: 境外下载, type: select, include-all-providers: true, filter: *FilterAll, proxies: [DIRECT]}
-  - {name: AI, type: select, proxies: [代理节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点]}
   - {name: Telegram, type: select, proxies: [代理节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点]}
   - {name: App Store, type: select, proxies: [DIRECT, 代理节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点]}
   - {name: Apple账户, type: select, proxies: [DIRECT, 代理节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点]}
@@ -173,77 +171,52 @@ proxy-groups:
 
 # 订阅规则
 rule-providers:
-
+  # 本地
   R_LAN_SPLITTER:
     <<: *RuleProviders
     path: './rules/LAN_SPLITTER.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/LAN_SPLITTER.yaml'
-
+  # 直连地址
   R_Direct:
     <<: *RuleProviders
     path: './rules/Direct.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/Direct.yaml'
-
+  # 代理地址
   R_Proxy:
     <<: *RuleProviders
     path: './rules/Proxy.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/Proxy.yaml'
-
+  # 国内下载
   R_ChinaDownloadCDN:
     <<: *RuleProviders
     path: './rules/ChinaDownloadCDN.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/ChinaDownloadCDN.yaml'
-
+  # 境外下载
   R_InternationalDownloadCDN:
     <<: *RuleProviders
     path: './rules/InternationalDownloadCDN.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/InternationalDownloadCDN.yaml'
-
+  # 境外下载
   R_AI:
     <<: *RuleProviders
     path: './rules/AI.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'
-
-
-  R_Game:
-    <<: *RuleProviders
-    path: './rules/Game.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/Game.yaml'
-
-  R_1Password:
-    <<: *RuleProviders
-    path: './rules/1PasswordUS.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/1PasswordUS.yaml'
-
-  R_Steam:
-    <<: *RuleProviders
-    path: './rules/Steam.yaml'
-    url: 'https://rule.kelee.one/Clash/Steam.yaml'
-
-  R_Netflix:
-    <<: *RuleProviders
-    path: './rules/Netflix.yaml'
-    url: 'https://rule.kelee.one/Clash/Netflix.yaml'
-
-  R_Emby:
-    <<: *RuleProviders
-    path: './rules/Emby.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/EmbyServer.yaml'
-
+  # 苹果境外服务
   R_AppleProxy:
     <<: *RuleProviders
     path: './rules/AppleProxy.yaml'
     url: 'https://rule.kelee.one/Clash/AppleProxy.yaml'
+  # 苹果国内服务
   R_iCloudChina:
     <<: *RuleProviders
     path: './rules/iCloudChina.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml'
-
+  # 苹果推送服务
   R_ApplePushNotificationService:
     <<: *RuleProviders
     path: './rules/ApplePushNotificationService.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml'
-
+  # 苹果更新服务
   R_AppleSoftwareUpdates:
     <<: *RuleProviders
     path: './rules/AppleSoftwareUpdates.yaml'
@@ -258,27 +231,22 @@ rule-providers:
     <<: *RuleProviders
     path: './rules/AppStore.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/AppStore.yaml'
-
-  R_TestFlight:
-    <<: *RuleProviders
-    path: './rules/TestFlight.yaml'
-    url: 'https://rule.kelee.one/Clash/TestFlight.yaml'
-
+  # 微软服务
   R_Microsoft:
     <<: *RuleProviders
     path: './rules/Microsoft.yaml'
     url: 'https://rule.kelee.one/Clash/Microsoft.yaml'
-
+  # Google服务
   R_Google:
     <<: *RuleProviders
     path: './rules/Google.yaml'
     url: 'https://rule.kelee.one/Clash/Google.yaml'
-
+  # Telegram服务
   R_Telegram:
     <<: *RuleProviders
     path: './rules/Telegram.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/Telegram.yaml'
-
+  # ESET杀毒软件国内服务
   R_ESET_China:
     <<: *RuleProviders
     path: './rules/ESET_China.yaml'
@@ -288,20 +256,19 @@ rule-providers:
 rules:
   - RULE-SET, R_LAN_SPLITTER, DIRECT
   - RULE-SET, R_Direct, DIRECT
-  - RULE-SET, R_Proxy, 兜底节点
+  - RULE-SET, R_Proxy, 代理节点
   - RULE-SET, R_ChinaDownloadCDN, DIRECT
   - RULE-SET, R_InternationalDownloadCDN, 境外下载
-  - RULE-SET, R_AI, AI
-  - RULE-SET, R_Steam, 兜底节点
+  - RULE-SET, R_AI, AI服务
   - RULE-SET, R_iCloudChina, DIRECT
   - RULE-SET, R_ApplePushNotificationService, DIRECT
   - RULE-SET, R_AppleSoftwareUpdates, DIRECT
-  - RULE-SET, R_AppleProxy, 兜底节点
+  - RULE-SET, R_AppleProxy, 代理节点
   - RULE-SET, R_AppleID, Apple账户
   - RULE-SET, R_AppStore, App Store
   - RULE-SET, R_Microsoft, Microsoft
-  - RULE-SET, R_Google, 兜底节点
-  - RULE-SET, R_Telegram, Telegram
+  - RULE-SET, R_Google, 代理节点
+  - RULE-SET, R_Telegram, 代理节点
   - RULE-SET, R_ESET_China, DIRECT
   - GEOIP, CN, DIRECT
   - MATCH, 兜底节点
