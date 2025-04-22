@@ -125,7 +125,7 @@ proxy-providers:
 
 # 策略组
 proxy-groups:
-  - {name: 代理节点, type: select, proxies: [手动节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png}
+  - {name: 🌍代理节点, type: select, proxies: [手动节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png}
   - {name: 手动节点, type: select, include-all-providers: true, filter: *FilterAll, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png}
   - {name: 兜底节点, type: select, proxies: [DIRECT, 手动节点, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
   - {name: 🇭🇰香港节点, type: select, include-all-providers: true, filter: *FilterHK, proxies: [⏱️️香港时延优选, 🚥香港故障转移, 🎛香港负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
@@ -158,12 +158,15 @@ proxy-groups:
   - {name: 🎛美国负载均衡, <<: *LoadBalance, filter: *FilterUS}
 
 
-  - {name: AI服务, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
-  - {name: 境外下载, type: select, include-all-providers: true, filter: *FilterAll, proxies: [DIRECT]}
-  - {name: Telegram, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
-  - {name: App Store, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
-  - {name: Apple账户, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
-  - {name: Microsoft, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
+  - {name: AI, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
+  - {name: Github, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Github.png}
+  - {name: 苹果, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png}
+  - {name: 苹果境外, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png}
+  - {name: 谷歌, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Google.png}
+  - {name: 电报, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png}
+  - {name: 微软, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png}
+  - {name: 境外下载, type: select, include-all-providers: true, filter: *FilterAll, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
+
 
 
 
@@ -176,6 +179,60 @@ rule-providers:
     <<: *RuleProviders
     path: './rules/LAN_SPLITTER.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/LAN_SPLITTER.yaml'
+  # AI服务
+  R_AI:
+    <<: *RuleProviders
+    path: './rules/AI.yaml'
+    url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'
+  # Github
+  R_Github:
+    <<: *RuleProviders
+    path: './rules/ESET_China.yaml'
+    url: 'https://kelee.one/Tool/Clash/Rule/Github.yaml'
+  # 苹果国内服务
+  R_iCloudChina:
+    <<: *RuleProviders
+    path: './rules/iCloudChina.yaml'
+    url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml'
+  # 苹果推送服务
+  R_ApplePushNotificationService:
+    <<: *RuleProviders
+    path: './rules/ApplePushNotificationService.yaml'
+    url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml'
+  # 苹果更新服务
+  R_AppleSoftwareUpdates:
+    <<: *RuleProviders
+    path: './rules/AppleSoftwareUpdates.yaml'
+    url: 'https://kelee.one/Tool/Clash/Rule/AppleSoftwareUpdates.yaml'
+  # 苹果境外服务
+  R_AppleProxy:
+    <<: *RuleProviders
+    path: './rules/AppleProxy.yaml'
+    url: 'https://rule.kelee.one/Clash/AppleProxy.yaml'
+  # 苹果服务
+  R_Apple:
+    <<: *RuleProviders
+    path: './rules/ESET_China.yaml'
+    url: 'https://kelee.one/Tool/Clash/Rule/Apple.yaml'
+  # Google
+  R_Google:
+    <<: *RuleProviders
+    path: './rules/Google.yaml'
+    url: 'https://rule.kelee.one/Clash/Google.yaml'
+  # Telegram
+  R_Telegram:
+    <<: *RuleProviders
+    path: './rules/Telegram.yaml'
+    url: 'https://kelee.one/Tool/Clash/Rule/Telegram.yaml'
+  # 微软服务
+  R_Microsoft:
+    <<: *RuleProviders
+    path: './rules/Microsoft.yaml'
+    url: 'https://rule.kelee.one/Clash/Microsoft.yaml'
+
+
+
+
   # 直连地址
   R_Direct:
     <<: *RuleProviders
@@ -196,79 +253,29 @@ rule-providers:
     <<: *RuleProviders
     path: './rules/InternationalDownloadCDN.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/InternationalDownloadCDN.yaml'
-  # 境外下载
-  R_AI:
-    <<: *RuleProviders
-    path: './rules/AI.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'
-  # 苹果境外服务
-  R_AppleProxy:
-    <<: *RuleProviders
-    path: './rules/AppleProxy.yaml'
-    url: 'https://rule.kelee.one/Clash/AppleProxy.yaml'
-  # 苹果国内服务
-  R_iCloudChina:
-    <<: *RuleProviders
-    path: './rules/iCloudChina.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml'
-  # 苹果推送服务
-  R_ApplePushNotificationService:
-    <<: *RuleProviders
-    path: './rules/ApplePushNotificationService.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml'
-  # 苹果更新服务
-  R_AppleSoftwareUpdates:
-    <<: *RuleProviders
-    path: './rules/AppleSoftwareUpdates.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/AppleSoftwareUpdates.yaml'
 
-  R_AppleID:
-    <<: *RuleProviders
-    path: './rules/AppleID.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/AppleID.yaml'
 
-  R_AppStore:
-    <<: *RuleProviders
-    path: './rules/AppStore.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/AppStore.yaml'
-  # 微软服务
-  R_Microsoft:
-    <<: *RuleProviders
-    path: './rules/Microsoft.yaml'
-    url: 'https://rule.kelee.one/Clash/Microsoft.yaml'
-  # Google服务
-  R_Google:
-    <<: *RuleProviders
-    path: './rules/Google.yaml'
-    url: 'https://rule.kelee.one/Clash/Google.yaml'
-  # Telegram服务
-  R_Telegram:
-    <<: *RuleProviders
-    path: './rules/Telegram.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/Telegram.yaml'
-  # ESET杀毒软件国内服务
-  R_ESET_China:
-    <<: *RuleProviders
-    path: './rules/ESET_China.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/ESET_China.yaml'
+
 
 # 规则指向
 rules:
   - RULE-SET, R_LAN_SPLITTER, DIRECT
-  - RULE-SET, R_Direct, DIRECT
-  - RULE-SET, R_Proxy, 代理节点
-  - RULE-SET, R_ChinaDownloadCDN, DIRECT
-  - RULE-SET, R_InternationalDownloadCDN, 境外下载
-  - RULE-SET, R_AI, AI服务
+  - RULE-SET, R_AI, AI
+  - RULE-SET, R_Github, Github
   - RULE-SET, R_iCloudChina, DIRECT
   - RULE-SET, R_ApplePushNotificationService, DIRECT
   - RULE-SET, R_AppleSoftwareUpdates, DIRECT
-  - RULE-SET, R_AppleProxy, 代理节点
-  - RULE-SET, R_AppleID, Apple账户
-  - RULE-SET, R_AppStore, App Store
-  - RULE-SET, R_Microsoft, Microsoft
-  - RULE-SET, R_Google, 代理节点
-  - RULE-SET, R_Telegram, 代理节点
-  - RULE-SET, R_ESET_China, DIRECT
+  - RULE-SET, R_AppleProxy, 苹果境外
+  - RULE-SET, R_Apple, 苹果
+  - RULE-SET, R_Google, 谷歌
+  - RULE-SET, R_Telegram, 电报
+  - RULE-SET, R_Microsoft, 微软
+
+
+
+
+  - RULE-SET, R_Proxy, 代理节点
+  - RULE-SET, R_ChinaDownloadCDN, DIRECT
+  - RULE-SET, R_InternationalDownloadCDN, 境外下载
   - GEOIP, CN, DIRECT
   - MATCH, 兜底节点
