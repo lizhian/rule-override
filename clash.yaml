@@ -95,7 +95,7 @@ dns:
     - https://223.6.6.6/dns-query#h3=true
 
 # 锚点 - 节点筛选组
-FilterHK: &FilterHK '^(?=.*((?i)🇭🇰|🇭🇰香港|(\b(HK|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterHK: &FilterHK '^(?=.*((?i)🇭🇰|香港|(\b(HK|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 FilterTW: &FilterTW '^(?=.*((?i)🇹🇼|台湾|(\b(TW|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 FilterJP: &FilterJP '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 FilterKR: &FilterKR '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
@@ -125,32 +125,32 @@ proxy-providers:
 
 # 策略组
 proxy-groups:
-  - {name: 代理节点, type: select, proxies: [手动节点, 🇭🇰香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png}
+  - {name: 代理节点, type: select, proxies: [手动节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png}
   - {name: 手动节点, type: select, include-all-providers: true, filter: *FilterAll, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png}
-  - {name: 兜底节点, type: select, proxies: [DIRECT, 手动节点, 代理节点, 🇭🇰香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
-  - {name: 🇭🇰香港节点, type: select, include-all-providers: true, filter: *FilterHK, proxies: [⏱️️🇭🇰香港时延优选, 🚥🇭🇰香港故障转移, 🎛🇭🇰香港负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
-  - {name: 台湾节点, type: select, include-all-providers: true, filter: *FilterTW, proxies: [⏱️️台湾时延优选, 🚥台湾故障转移, 🎛台湾负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png}
-  - {name: 日本节点, type: select, include-all-providers: true, filter: *FilterJP, proxies: [⏱️️日本时延优选, 🚥日本故障转移, 🎛日本负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png}
-  - {name: 韩国节点, type: select, include-all-providers: true, filter: *FilterKR, proxies: [⏱️️韩国时延优选, 🚥韩国故障转移, 🎛韩国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png}
-  - {name: 新国节点, type: select, include-all-providers: true, filter: *FilterSG, proxies: [⏱️️新国时延优选, 🚥新国故障转移, 🎛新国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png}
-  - {name: 美国节点, type: select, include-all-providers: true, filter: *FilterUS, proxies: [⏱️️美国时延优选, 🚥美国故障转移, 🎛美国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png}
+  - {name: 兜底节点, type: select, proxies: [DIRECT, 手动节点, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
+  - {name: 🇭🇰香港节点, type: select, include-all-providers: true, filter: *FilterHK, proxies: [⏱️️香港时延优选, 🚥香港故障转移, 🎛香港负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
+  - {name: 🇨🇳台湾节点, type: select, include-all-providers: true, filter: *FilterTW, proxies: [⏱️️台湾时延优选, 🚥台湾故障转移, 🎛台湾负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png}
+  - {name: 🇯🇵日本节点, type: select, include-all-providers: true, filter: *FilterJP, proxies: [⏱️️日本时延优选, 🚥日本故障转移, 🎛日本负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png}
+  - {name: 🇰🇷韩国节点, type: select, include-all-providers: true, filter: *FilterKR, proxies: [⏱️️韩国时延优选, 🚥韩国故障转移, 🎛韩国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png}
+  - {name: 🇸🇬新国节点, type: select, include-all-providers: true, filter: *FilterSG, proxies: [⏱️️新国时延优选, 🚥新国故障转移, 🎛新国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png}
+  - {name: 🇺🇸美国节点, type: select, include-all-providers: true, filter: *FilterUS, proxies: [⏱️️美国时延优选, 🚥美国故障转移, 🎛美国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png}
 
 # 时延优选
-  - {name: ⏱️️🇭🇰香港时延优选, <<: *UrlTest, filter: *FilterHK}
+  - {name: ⏱️️香港时延优选, <<: *UrlTest, filter: *FilterHK}
   - {name: ⏱️️台湾时延优选, <<: *UrlTest, filter: *FilterTW}
   - {name: ⏱️️日本时延优选, <<: *UrlTest, filter: *FilterJP}
   - {name: ⏱️️韩国时延优选, <<: *UrlTest, filter: *FilterKR}
   - {name: ⏱️️新国时延优选, <<: *UrlTest, filter: *FilterSG}
   - {name: ⏱️️美国时延优选, <<: *UrlTest, filter: *FilterUS}
 # 故障转移
-  - {name: 🚥🇭🇰香港故障转移, <<: *FallBack, filter: *FilterHK}
+  - {name: 🚥香港故障转移, <<: *FallBack, filter: *FilterHK}
   - {name: 🚥台湾故障转移, <<: *FallBack, filter: *FilterTW}
   - {name: 🚥日本故障转移, <<: *FallBack, filter: *FilterJP}
   - {name: 🚥韩国故障转移, <<: *FallBack, filter: *FilterKR}
   - {name: 🚥新国故障转移, <<: *FallBack, filter: *FilterSG}
   - {name: 🚥美国故障转移, <<: *FallBack, filter: *FilterUS}
 # 负载均衡
-  - {name: 🎛🇭🇰香港负载均衡, <<: *LoadBalance, filter: *FilterHK}
+  - {name: 🎛香港负载均衡, <<: *LoadBalance, filter: *FilterHK}
   - {name: 🎛台湾负载均衡, <<: *LoadBalance, filter: *FilterTW}
   - {name: 🎛日本负载均衡, <<: *LoadBalance, filter: *FilterJP}
   - {name: 🎛韩国负载均衡, <<: *LoadBalance, filter: *FilterKR}
@@ -158,12 +158,12 @@ proxy-groups:
   - {name: 🎛美国负载均衡, <<: *LoadBalance, filter: *FilterUS}
 
 
-  - {name: AI服务, type: select, proxies: [代理节点, 🇭🇰香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
+  - {name: AI服务, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
   - {name: 境外下载, type: select, include-all-providers: true, filter: *FilterAll, proxies: [DIRECT]}
-  - {name: Telegram, type: select, proxies: [代理节点, 🇭🇰香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点]}
-  - {name: App Store, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点]}
-  - {name: Apple账户, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点]}
-  - {name: Microsoft, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点]}
+  - {name: Telegram, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
+  - {name: App Store, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
+  - {name: Apple账户, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
+  - {name: Microsoft, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
 
 
 
