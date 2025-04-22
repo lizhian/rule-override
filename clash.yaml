@@ -165,7 +165,7 @@ proxy-groups:
   - {name: 谷歌, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Google.png}
   - {name: 电报, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png}
   - {name: 微软, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png}
-  - {name: 境外下载, type: select, include-all-providers: true, filter: *FilterAll, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
+  - {name: 境外下载, type: select, include-all-providers: true, filter: *FilterAll, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png}
 
 
 
