@@ -272,8 +272,8 @@ rules:
   - RULE-SET, YouTube, 谷歌
   - RULE-SET, YouTubeMusic, 谷歌
   - RULE-SET, Google, 谷歌
-  - RULE-SET, TelegramSG, 新国节点
-  - RULE-SET, TelegramUS, 美国节点
+  - RULE-SET, TelegramSG, 🇸🇬新国节点
+  - RULE-SET, TelegramUS, 🇺🇸美国节点
   - RULE-SET, Telegram, 电报
   - RULE-SET, Microsoft, 微软
   - RULE-SET, ChinaDownloadCDN, DIRECT
