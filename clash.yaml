@@ -189,7 +189,7 @@ rule-providers:
   # Github
   R_Github:
     <<: *RuleProviders
-    path: './rules/ESET_China.yaml'
+    path: './rules/GitHub.yaml'
     url: 'https://rule.kelee.one/Clash/GitHub.yaml'
   # 苹果国内服务
   R_iCloudChina:
@@ -214,7 +214,7 @@ rule-providers:
   # 苹果服务
   R_Apple:
     <<: *RuleProviders
-    path: './rules/ESET_China.yaml'
+    path: './rules/Apple.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/Apple.yaml'
   # Google
   R_Google:
