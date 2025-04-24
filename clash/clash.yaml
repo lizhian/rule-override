@@ -272,17 +272,17 @@ rules:
   - RULE-SET, YouTube, 谷歌
   - RULE-SET, YouTubeMusic, 谷歌
   - RULE-SET, Google, 谷歌
-  - RULE-SET, TelegramSG, 新国策略
-  - RULE-SET, TelegramUS, 美国策略
+  - RULE-SET, TelegramSG, 新国节点
+  - RULE-SET, TelegramUS, 美国节点
   - RULE-SET, Telegram, 电报
   - RULE-SET, Microsoft, 微软
   - RULE-SET, ChinaDownloadCDN, DIRECT
   - RULE-SET, InternationalDownloadCDN, 境外下载
   - RULE-SET, Cloudflarecn, DIRECT
-  - RULE-SET, Cloudflare, 代理策略
-  - RULE-SET, GitHub, 代理策略
-  - RULE-SET, Docker, 代理策略
-  - RULE-SET, Twitter, 代理策略
+  - RULE-SET, Cloudflare, 代理节点
+  - RULE-SET, GitHub, 代理节点
+  - RULE-SET, Docker, 代理节点
+  - RULE-SET, Twitter, 代理节点
   - RULE-SET, ChinaMax, DIRECT
   - GEOIP, CN, DIRECT
   - MATCH, 兜底节点
