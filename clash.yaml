@@ -6,6 +6,8 @@
 # https://github.com/ddgksf2013/Profile/blob/master/ClashforWindows.yaml
 # https://github.com/ddgksf2013/Profile/blob/master/MihomoParty.yaml
 # https://github.com/luestr/ProxyResource/blob/main/Tool/Clash/Config/Clash_Sample_Configuration_By_iKeLee.yaml
+# https://github.com/luestr/ShuntRules
+# https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash
 port: 7890
 socks-port: 7891
 mixed-port: 7892
@@ -115,51 +117,50 @@ RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, 
 
 # 锚点 - 节点订阅 & 节点订阅的参数 [每小时更新一次订阅节点，每 6 秒一次健康检查]
 NodeParam: &NodeParam {type: http, interval: 3600, health-check: {enable: true, url: 'http://www.google.com/blank.html', interval: 6}}
-proxy-providers:
-  节点名称:
-    url: '节点地址'
-    <<: *NodeParam
-    path: './proxy_providers/节点名称.yaml'
-    override:
-      additional-prefix: "【节点名称】" # 为订阅节点添加机场名称前缀
+# proxy-providers:
+#   节点名称:
+#     url: '节点地址'
+#     <<: *NodeParam
+#     path: './proxy_providers/节点名称.yaml'
+#     override:
+#       additional-prefix: "【节点名称】" # 为订阅节点添加机场名称前缀
 
 # 策略组
 proxy-groups:
+  # 主要
   - {name: 代理节点, type: select, proxies: [手动节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png}
   - {name: 手动节点, type: select, include-all-providers: true, filter: *FilterAll, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png}
   - {name: 兜底节点, type: select, proxies: [DIRECT, 手动节点, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
+  # 地区
   - {name: 🇭🇰香港节点, type: select, include-all-providers: true, filter: *FilterHK, proxies: [⏱️️香港时延优选, 🚥香港故障转移, 🎛香港负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
   - {name: 🇨🇳台湾节点, type: select, include-all-providers: true, filter: *FilterTW, proxies: [⏱️️台湾时延优选, 🚥台湾故障转移, 🎛台湾负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png}
   - {name: 🇯🇵日本节点, type: select, include-all-providers: true, filter: *FilterJP, proxies: [⏱️️日本时延优选, 🚥日本故障转移, 🎛日本负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png}
   - {name: 🇰🇷韩国节点, type: select, include-all-providers: true, filter: *FilterKR, proxies: [⏱️️韩国时延优选, 🚥韩国故障转移, 🎛韩国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png}
   - {name: 🇸🇬新国节点, type: select, include-all-providers: true, filter: *FilterSG, proxies: [⏱️️新国时延优选, 🚥新国故障转移, 🎛新国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png}
   - {name: 🇺🇸美国节点, type: select, include-all-providers: true, filter: *FilterUS, proxies: [⏱️️美国时延优选, 🚥美国故障转移, 🎛美国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png}
-
-# 时延优选
+  # 时延优选
   - {name: ⏱️️香港时延优选, <<: *UrlTest, filter: *FilterHK}
   - {name: ⏱️️台湾时延优选, <<: *UrlTest, filter: *FilterTW}
   - {name: ⏱️️日本时延优选, <<: *UrlTest, filter: *FilterJP}
   - {name: ⏱️️韩国时延优选, <<: *UrlTest, filter: *FilterKR}
   - {name: ⏱️️新国时延优选, <<: *UrlTest, filter: *FilterSG}
   - {name: ⏱️️美国时延优选, <<: *UrlTest, filter: *FilterUS}
-# 故障转移
+  # 故障转移
   - {name: 🚥香港故障转移, <<: *FallBack, filter: *FilterHK}
   - {name: 🚥台湾故障转移, <<: *FallBack, filter: *FilterTW}
   - {name: 🚥日本故障转移, <<: *FallBack, filter: *FilterJP}
   - {name: 🚥韩国故障转移, <<: *FallBack, filter: *FilterKR}
   - {name: 🚥新国故障转移, <<: *FallBack, filter: *FilterSG}
   - {name: 🚥美国故障转移, <<: *FallBack, filter: *FilterUS}
-# 负载均衡
+  # 负载均衡
   - {name: 🎛香港负载均衡, <<: *LoadBalance, filter: *FilterHK}
   - {name: 🎛台湾负载均衡, <<: *LoadBalance, filter: *FilterTW}
   - {name: 🎛日本负载均衡, <<: *LoadBalance, filter: *FilterJP}
   - {name: 🎛韩国负载均衡, <<: *LoadBalance, filter: *FilterKR}
   - {name: 🎛新国负载均衡, <<: *LoadBalance, filter: *FilterSG}
   - {name: 🎛美国负载均衡, <<: *LoadBalance, filter: *FilterUS}
-
-
-  - {name: AI, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
-  - {name: Github, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/github.png}
+  # 服务
+  - {name: AIGC, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
   - {name: 苹果, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png}
   - {name: 苹果境外, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png}
   - {name: 谷歌, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Google.png}
@@ -260,8 +261,7 @@ rule-providers:
 # 规则指向
 rules:
   - RULE-SET, R_LAN_SPLITTER, DIRECT
-  - RULE-SET, R_AI, AI
-  - RULE-SET, R_Github, Github
+  - RULE-SET, R_AI, AIGC
   - RULE-SET, R_iCloudChina, DIRECT
   - RULE-SET, R_ApplePushNotificationService, DIRECT
   - RULE-SET, R_AppleSoftwareUpdates, DIRECT
@@ -273,7 +273,7 @@ rules:
 
 
 
-
+  - RULE-SET, R_Github, 代理节点
   - RULE-SET, R_Proxy, 代理节点
   - RULE-SET, R_ChinaDownloadCDN, DIRECT
   - RULE-SET, R_InternationalDownloadCDN, 境外下载
