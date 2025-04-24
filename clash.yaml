@@ -169,114 +169,143 @@ proxy-groups:
   - {name: 微软, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png}
   - {name: 境外下载, type: select, include-all-providers: true, filter: *FilterAll, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png}
 
-
-
-
-
-
 # 订阅规则
 rule-providers:
-  # 本地
-  R_LAN_SPLITTER:
+  Lan:
     <<: *RuleProviders
-    path: './rules/LAN_SPLITTER.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/LAN_SPLITTER.yaml'
-  # AI服务
-  R_AI:
+    path: './rules/Lan.yaml'
+    url: 'https://rule.kelee.one/Clash/Lan.yaml'
+  AI:
     <<: *RuleProviders
     path: './rules/AI.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'
-  # Github
-  R_Github:
-    <<: *RuleProviders
-    path: './rules/GitHub.yaml'
-    url: 'https://rule.kelee.one/Clash/GitHub.yaml'
-  # 苹果国内服务
-  R_iCloudChina:
+  iCloudChina:
     <<: *RuleProviders
     path: './rules/iCloudChina.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml'
-  # 苹果推送服务
-  R_ApplePushNotificationService:
-    <<: *RuleProviders
-    path: './rules/ApplePushNotificationService.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml'
-  # 苹果更新服务
-  R_AppleSoftwareUpdates:
+  AppleSoftwareUpdates:
     <<: *RuleProviders
     path: './rules/AppleSoftwareUpdates.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/AppleSoftwareUpdates.yaml'
-  # 苹果境外服务
-  R_AppleProxy:
+  ApplePushNotificationService:
+    <<: *RuleProviders
+    path: './rules/ApplePushNotificationService.yaml'
+    url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml'
+  AppleProxy:
     <<: *RuleProviders
     path: './rules/AppleProxy.yaml'
     url: 'https://rule.kelee.one/Clash/AppleProxy.yaml'
-  # 苹果服务
-  R_Apple:
+  Apple:
     <<: *RuleProviders
     path: './rules/Apple.yaml'
     url: 'https://rule.kelee.one/Clash/Apple.yaml'
-  # Google
-  R_Google:
+  YouTube:
+    <<: *RuleProviders
+    path: './rules/YouTube.yaml'
+    url: 'https://rule.kelee.one/Clash/YouTube.yaml'
+  YouTubeMusic:
+    <<: *RuleProviders
+    path: './rules/YouTubeMusic.yaml'
+    url: 'https://rule.kelee.one/Clash/YouTubeMusic.yaml'
+  Google:
     <<: *RuleProviders
     path: './rules/Google.yaml'
     url: 'https://rule.kelee.one/Clash/Google.yaml'
-  # Telegram
-  R_Telegram:
+  TelegramSG:
+    <<: *RuleProviders
+    path: './rules/TelegramSG.yaml'
+    url: 'https://rule.kelee.one/Clash/TelegramSG.yaml'
+  TelegramUS:
+    <<: *RuleProviders
+    path: './rules/TelegramUS.yaml'
+    url: 'https://rule.kelee.one/Clash/TelegramUS.yaml'
+  Telegram:
     <<: *RuleProviders
     path: './rules/Telegram.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/Telegram.yaml'
-  # 微软服务
-  R_Microsoft:
+    url: 'https://rule.kelee.one/Clash/Telegram.yaml'
+  Microsoft:
     <<: *RuleProviders
     path: './rules/Microsoft.yaml'
     url: 'https://rule.kelee.one/Clash/Microsoft.yaml'
-
-
-
-
-  # 直连地址
-  R_Direct:
-    <<: *RuleProviders
-    path: './rules/Direct.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/Direct.yaml'
-  # 代理地址
-  R_Proxy:
-    <<: *RuleProviders
-    path: './rules/Proxy.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/Proxy.yaml'
-  # 国内下载
-  R_ChinaDownloadCDN:
+  ChinaDownloadCDN:
     <<: *RuleProviders
     path: './rules/ChinaDownloadCDN.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/ChinaDownloadCDN.yaml'
-  # 境外下载
-  R_InternationalDownloadCDN:
+  InternationalDownloadCDN:
     <<: *RuleProviders
     path: './rules/InternationalDownloadCDN.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/InternationalDownloadCDN.yaml'
-
-
-
+  Cloudflarecn:
+    <<: *RuleProviders
+    path: './rules/Cloudflarecn.yaml'
+    url: 'https://rule.kelee.one/Clash/Cloudflarecn.yaml'
+  Cloudflare:
+    <<: *RuleProviders
+    path: './rules/Cloudflare.yaml'
+    url: 'https://rule.kelee.one/Clash/Cloudflare.yaml'
+  GitHub:
+    <<: *RuleProviders
+    path: './rules/GitHub.yaml'
+    url: 'https://rule.kelee.one/Clash/GitHub.yaml'
+  Docker:
+    <<: *RuleProviders
+    path: './rules/Docker.yaml'
+    url: 'https://rule.kelee.one/Clash/Docker.yaml'
+  Twitter:
+    <<: *RuleProviders
+    path: './rules/Twitter.yaml'
+    url: 'https://rule.kelee.one/Clash/Twitter.yaml'
+  ChinaMax:
+    <<: *RuleProviders
+    path: './rules/xxx.yaml'
+    url: 'https://rule.kelee.one/Clash/ChinaMax.yaml'
 
 # 规则指向
 rules:
-  - RULE-SET, R_LAN_SPLITTER, DIRECT
-  - RULE-SET, R_AI, AIGC
-  - RULE-SET, R_iCloudChina, DIRECT
-  - RULE-SET, R_ApplePushNotificationService, DIRECT
-  - RULE-SET, R_AppleSoftwareUpdates, DIRECT
-  - RULE-SET, R_AppleProxy, 苹果境外
-  - RULE-SET, R_Apple, 苹果
-  - RULE-SET, R_Google, 谷歌
-  - RULE-SET, R_Telegram, 电报
-  - RULE-SET, R_Microsoft, 微软
-
-
-
-  - RULE-SET, R_Github, 代理节点
-  - RULE-SET, R_Proxy, 代理节点
-  - RULE-SET, R_ChinaDownloadCDN, DIRECT
-  - RULE-SET, R_InternationalDownloadCDN, 境外下载
+  - RULE-SET, Lan, DIRECT
+  - RULE-SET, AI, AIGC
+  - RULE-SET, iCloudChina, DIRECT
+  - RULE-SET, ApplePushNotificationService, DIRECT
+  - RULE-SET, AppleSoftwareUpdates, DIRECT
+  - RULE-SET, AppleProxy, 苹果境外
+  - RULE-SET, Apple, 苹果
+  - RULE-SET, YouTube, 谷歌
+  - RULE-SET, YouTubeMusic, 谷歌
+  - RULE-SET, Google, 谷歌
+  - RULE-SET, TelegramSG, 新国策略
+  - RULE-SET, TelegramUS, 美国策略
+  - RULE-SET, Telegram, 电报
+  - RULE-SET, Microsoft, 微软
+  - RULE-SET, ChinaDownloadCDN, DIRECT
+  - RULE-SET, InternationalDownloadCDN, 境外下载
+  - RULE-SET, Cloudflarecn, DIRECT
+  - RULE-SET, Cloudflare, 代理策略
+  - RULE-SET, GitHub, 代理策略
+  - RULE-SET, Docker, 代理策略
+  - RULE-SET, Twitter, 代理策略
+  - RULE-SET, ChinaMax, DIRECT
   - GEOIP, CN, DIRECT
   - MATCH, 兜底节点
+
+# https://rule.kelee.one/Clash/Lan.yaml, policy=DIRECT, tag=Lan.list, enabled=true
+# https://kelee.one/Tool/Clash/Rule/AI.yaml, policy=AIGC, tag=AI.list, enabled=true
+# https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml, policy=DIRECT, tag=iCloudChina.list, enabled=true
+# https://kelee.one/Tool/Clash/Rule/AppleSoftwareUpdates.yaml, policy=DIRECT, tag=AppleSoftwareUpdates.list, enabled=true
+# https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml, policy=DIRECT, tag=ApplePushNotificationService.list, enabled=true
+# https://rule.kelee.one/Clash/AppleProxy.yaml, policy=苹果境外, tag=AppleProxy.list, enabled=true
+# https://rule.kelee.one/Clash/Apple.yaml, policy=苹果, tag=Apple.list, enabled=true
+# https://rule.kelee.one/Clash/YouTube.yaml, policy=谷歌, tag=YouTube.list, enabled=true
+# https://rule.kelee.one/Clash/YouTubeMusic.yaml, policy=谷歌, tag=YouTubeMusic.list, enabled=true
+# https://rule.kelee.one/Clash/Google.yaml, policy=谷歌, tag=Google.list, enabled=true
+# https://rule.kelee.one/Clash/TelegramSG.yaml, policy=新国策略, tag=TelegramSG.list, enabled=true
+# https://rule.kelee.one/Clash/TelegramUS.yaml, policy=美国策略, tag=TelegramUS.list, enabled=true
+# https://rule.kelee.one/Clash/Telegram.yaml, policy=电报, tag=Telegram.list, enabled=true
+# https://rule.kelee.one/Clash/Microsoft.yaml, policy=微软, tag=Microsoft.list, enabled=true
+# https://kelee.one/Tool/Clash/Rule/ChinaDownloadCDN.yaml, policy=DIRECT, tag=ChinaDownloadCDN.list, enabled=true
+# https://kelee.one/Tool/Clash/Rule/InternationalDownloadCDN.yaml, policy=境外下载, tag=InternationalDownloadCDN.list, enabled=true
+# https://rule.kelee.one/Clash/Cloudflarecn.yaml, policy=DIRECT, tag=Cloudflarecn.list, enabled=true
+# https://rule.kelee.one/Clash/Cloudflare.yaml, policy=代理策略, tag=Cloudflare.list, enabled=true
+# https://rule.kelee.one/Clash/GitHub.yaml, policy=代理策略, tag=GitHub.list, enabled=true
+# https://rule.kelee.one/Clash/Docker.yaml, policy=代理策略, tag=Docker.list, enabled=true
+# https://rule.kelee.one/Clash/Twitter.yaml, policy=代理策略, tag=Twitter.list, enabled=true
+# https://rule.kelee.one/Clash/ChinaMax.yaml, policy=DIRECT, tag=ChinaMax.list, enabled=true
