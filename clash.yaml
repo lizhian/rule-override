@@ -215,7 +215,7 @@ rule-providers:
   R_Apple:
     <<: *RuleProviders
     path: './rules/Apple.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/Apple.yaml'
+    url: 'https://rule.kelee.one/Tool/Clash/Rule/Apple.yaml'
   # Google
   R_Google:
     <<: *RuleProviders
