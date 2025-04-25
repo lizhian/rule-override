@@ -1,7 +1,4 @@
 # clash配置
-# 日期：2025-03-30 19:55:16
-# 配置作者：https://t.me/iKeLee
-# 适用版本：所有使用 mihomo 核心的程序
 # 参考配置
 # https://github.com/ddgksf2013/Profile/blob/master/ClashforWindows.yaml
 # https://github.com/ddgksf2013/Profile/blob/master/MihomoParty.yaml
@@ -10,6 +7,40 @@
 # https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash
 # https://github.com/Lanlan13-14/Rules/blob/main/configfull.yaml
 # https://github.com/peiyingyao/Rule-for-OCD
+
+
+# 锚点区
+# 锚点 - 节点筛选组
+FilterHK:  &FilterHK  '^(?=.*((?i)🇭🇰|香港|(\b(HK|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterTW:  &FilterTW  '^(?=.*((?i)🇹🇼|台湾|(\b(TW|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterJP:  &FilterJP  '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterKR:  &FilterKR  '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterSG:  &FilterSG  '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterUS:  &FilterUS  '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterAll: &FilterAll '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
+
+# 锚点 - 策略组参数
+UrlTest:     &UrlTest     {type: url-test,     interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, tolerance: 20}
+FallBack:    &FallBack    {type: fallback,     interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
+LoadBalance: &LoadBalance {type: load-balance, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, strategy: consistent-hashing}
+# 锚点 - 规则参数
+YamlClass: &YamlClass {format: yaml, behavior: classical, type: http, interval: 3600, proxy: DIRECT}
+MrsDomain: &MrsDomain {format: mrs,  behavior: domain,    type: http, interval: 3600, proxy: DIRECT}
+MrsIP:     &MrsIP     {format: mrs,  behavior: ipcidr,    type: http, interval: 3600, proxy: DIRECT}
+
+# 锚点区 - 节点选择
+ProxyNation: &ProxyNation [🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]
+ProxyFirst:  &ProxyFirst  {type: select, proxies: [代理节点, *ProxyNation]}
+DirectFirst: &DirectFirst {type: select, proxies: [DIRECT, 代理节点, *ProxyNation]}
+
+# 锚点 - 节点订阅 & 节点订阅的参数 [每小时更新一次订阅节点，每 6 秒一次健康检查]
+ProxyParam: &ProxyParam {type: http, interval: 3600, health-check: {enable: true, url: 'http://www.google.com/blank.html', interval: 6}}
+
+# 订阅配置
+proxy-providers:
+  节点名称: {<<: *ProxyParam, url: '节点地址',path: './proxy_providers/节点名称.yaml', override: {additional-prefix: "【节点名称】"}}
+    
+# 核心配置
 port: 7890
 socks-port: 7891
 mixed-port: 7892
@@ -98,45 +129,12 @@ dns:
     - https://223.5.5.5/dns-query#h3=true
     - https://223.6.6.6/dns-query#h3=true
 
-# 锚点 - 节点筛选组
-FilterHK: &FilterHK '^(?=.*((?i)🇭🇰|香港|(\b(HK|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-FilterTW: &FilterTW '^(?=.*((?i)🇹🇼|台湾|(\b(TW|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-FilterJP: &FilterJP '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-FilterKR: &FilterKR '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-FilterSG: &FilterSG '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-FilterUS: &FilterUS '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-FilterAll: &FilterAll '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
-
-# 策略组参数锚点
-# 锚点 - 时延优选参数 [每 6 秒一次惰性健康检查，容差 20ms，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
-UrlTest: &UrlTest {type: url-test, interval: 6, tolerance: 20, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
-# 锚点 - 故障转移参数 [每 6 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
-FallBack: &FallBack {type: fallback, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
-# 锚点 - 负载均衡参数 [每 6 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
-LoadBalance: &LoadBalance {type: load-balance, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
-# 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用直连策略]
-RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml, proxy: DIRECT}
-# 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用直连策略]
-RuleProviders_mrs_domain: &RuleProviders_mrs_domain {type: http, behavior: domain, interval: 3600, format: mrs, proxy: DIRECT}
-RuleProviders_mrs_ip: &RuleProviders_mrs_ip {type: http, behavior: ipcidr, interval: 3600, format: mrs, proxy: DIRECT}
-
-# 锚点 - 节点订阅 & 节点订阅的参数 [每小时更新一次订阅节点，每 6 秒一次健康检查]
-NodeParam: &NodeParam {type: http, interval: 3600, health-check: {enable: true, url: 'http://www.google.com/blank.html', interval: 6}}
-
-proxy-providers:
-  节点名称:
-    url: '节点地址'
-    <<: *NodeParam
-    path: './proxy_providers/节点名称.yaml'
-    override:
-      additional-prefix: "【节点名称】" # 为订阅节点添加机场名称前缀
-
 # 策略组
 proxy-groups:
   # 主要
-  - {name: 代理节点,    type: select, proxies: [手动节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png}
-  - {name: 手动节点,    type: select, include-all-providers: true, filter: *FilterAll, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png}
-  - {name: 兜底节点,    type: select, proxies: [DIRECT, 手动节点, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
+  - {name: 代理节点,    type: select, proxies: [手动节点, *ProxyNation],                    icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png}
+  - {name: 手动节点,    type: select, include-all-providers: true, filter: *FilterAll,      icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png}
+  - {name: 兜底节点,    type: select, proxies: [DIRECT, 手动节点, 代理节点, *ProxyNation],  icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
   # 地区
   - {name: 🇭🇰香港节点,  type: select, include-all-providers: true, filter: *FilterHK, proxies: [⏱️️香港时延优选, 🚥香港故障转移, 🎛香港负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
   - {name: 🇨🇳台湾节点,  type: select, include-all-providers: true, filter: *FilterTW, proxies: [⏱️️台湾时延优选, 🚥台湾故障转移, 🎛台湾负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png}
@@ -166,68 +164,68 @@ proxy-groups:
   - {name: 🎛新国负载均衡, <<: *LoadBalance, filter: *FilterSG}
   - {name: 🎛美国负载均衡, <<: *LoadBalance, filter: *FilterUS}
   # 服务
-  - {name: AIGC, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
-  - {name: 苹果, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png}
-  - {name: 苹果境外, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png}
-  - {name: 谷歌, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Google.png}
-  - {name: 电报, type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png}
-  - {name: 微软, type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png}
-  - {name: 境外下载, type: select, include-all-providers: true, filter: *FilterAll, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png}
-
-# 订阅规则
-rule-providers:
-  Lan:                          {<<: *RuleProviders,            path: './rules/Lan.yaml',                           url: 'https://rule.kelee.one/Clash/Lan.yaml'}
-  AI:                           {<<: *RuleProviders,            path: './rules/AI.yaml',                            url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'}
-  iCloudChina:                  {<<: *RuleProviders,            path: './rules/iCloudChina.yaml',                   url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml'}
-  AppleSoftwareUpdates:         {<<: *RuleProviders,            path: './rules/AppleSoftwareUpdates.yaml',          url: 'https://kelee.one/Tool/Clash/Rule/AppleSoftwareUpdates.yaml'}
-  ApplePushNotificationService: {<<: *RuleProviders,            path: './rules/ApplePushNotificationService.yaml',  url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml'}
-  AppleProxy:                   {<<: *RuleProviders,            path: './rules/AppleProxy.yaml',                    url: 'https://rule.kelee.one/Clash/AppleProxy.yaml'}
-  Apple:                        {<<: *RuleProviders,            path: './rules/Apple.yaml',                         url: 'https://rule.kelee.one/Clash/Apple.yaml'}
-  YouTube:                      {<<: *RuleProviders,            path: './rules/YouTube.yaml',                       url: 'https://rule.kelee.one/Clash/YouTube.yaml'}
-  YouTubeMusic:                 {<<: *RuleProviders,            path: './rules/YouTubeMusic.yaml',                  url: 'https://rule.kelee.one/Clash/YouTubeMusic.yaml'}
-  Google:                       {<<: *RuleProviders,            path: './rules/Google.yaml',                        url: 'https://rule.kelee.one/Clash/Google.yaml'}
-  TelegramSG:                   {<<: *RuleProviders,            path: './rules/TelegramSG.yaml',                    url: 'https://rule.kelee.one/Clash/TelegramSG.yaml'}
-  TelegramUS:                   {<<: *RuleProviders,            path: './rules/TelegramUS.yaml',                    url: 'https://rule.kelee.one/Clash/TelegramUS.yaml'}
-  Telegram:                     {<<: *RuleProviders,            path: './rules/Telegram.yaml',                      url: 'https://rule.kelee.one/Clash/Telegram.yaml'}
-  Microsoft:                    {<<: *RuleProviders,            path: './rules/Microsoft.yaml',                     url: 'https://rule.kelee.one/Clash/Microsoft.yaml'}
-  ChinaDownloadCDN:             {<<: *RuleProviders,            path: './rules/ChinaDownloadCDN.yaml',              url: 'https://kelee.one/Tool/Clash/Rule/ChinaDownloadCDN.yaml'}
-  InternationalDownloadCDN:     {<<: *RuleProviders,            path: './rules/InternationalDownloadCDN.yaml',      url: 'https://kelee.one/Tool/Clash/Rule/InternationalDownloadCDN.yaml'}
-  Cloudflarecn:                 {<<: *RuleProviders,            path: './rules/Cloudflarecn.yaml',                  url: 'https://rule.kelee.one/Clash/Cloudflarecn.yaml'}
-  Cloudflare:                   {<<: *RuleProviders,            path: './rules/Cloudflare.yaml',                    url: 'https://rule.kelee.one/Clash/Cloudflare.yaml'}
-  GitHub:                       {<<: *RuleProviders,            path: './rules/GitHub.yaml',                        url: 'https://rule.kelee.one/Clash/GitHub.yaml'}
-  Docker:                       {<<: *RuleProviders,            path: './rules/Docker.yaml',                        url: 'https://rule.kelee.one/Clash/Docker.yaml'}
-  Twitter:                      {<<: *RuleProviders,            path: './rules/Twitter.yaml',                       url: 'https://rule.kelee.one/Clash/Twitter.yaml'}
-  ChinaMax_OCD_Domain:          {<<: *RuleProviders_mrs_domain, path: './rules/ChinaMax_OCD_Domain.mrs',            url: 'https://testingcf.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax_OCD_Domain.mrs'}
-  ChinaMax_OCD_IP:              {<<: *RuleProviders_mrs_ip,     path: './rules/ChinaMax_OCD_IP.mrs',                url: 'https://testingcf.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax_OCD_IP.mrs'}
-
+  - {name: AIGC,     <<: *ProxyFirst,  icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
+  - {name: 苹果,     <<: *DirectFirst, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png}
+  - {name: 苹果境外, <<: *ProxyFirst,  icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png}
+  - {name: 谷歌,     <<: *ProxyFirst,  icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Google.png}
+  - {name: 电报,     <<: *ProxyFirst,  icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png}
+  - {name: 微软,     <<: *DirectFirst, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png}
+  - {name: 境外下载, <<: *DirectFirst, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png, include-all-providers: true, filter: *FilterAll}
 
 # 规则指向
 rules:
-  - RULE-SET, Lan, DIRECT
-  - RULE-SET, AI, AIGC
-  - RULE-SET, iCloudChina, DIRECT
+  - RULE-SET, Lan,                          DIRECT
+  - RULE-SET, AI,                           AIGC
+  - RULE-SET, iCloudChina,                  DIRECT
   - RULE-SET, ApplePushNotificationService, DIRECT
-  - RULE-SET, AppleSoftwareUpdates, DIRECT
-  - RULE-SET, AppleProxy, 苹果境外
-  - RULE-SET, Apple, 苹果
-  - RULE-SET, YouTube, 谷歌
-  - RULE-SET, YouTubeMusic, 谷歌
-  - RULE-SET, Google, 谷歌
-  - RULE-SET, TelegramSG, 🇸🇬新国节点
-  - RULE-SET, TelegramUS, 🇺🇸美国节点
-  - RULE-SET, Telegram, 电报
-  - RULE-SET, Microsoft, 微软
-  - RULE-SET, ChinaDownloadCDN, DIRECT
-  - RULE-SET, InternationalDownloadCDN, 境外下载
-  - RULE-SET, Cloudflarecn, DIRECT
-  - RULE-SET, Cloudflare, 代理节点
-  - RULE-SET, GitHub, 代理节点
-  - RULE-SET, Docker, 代理节点
-  - RULE-SET, Twitter, 代理节点
-  - RULE-SET, ChinaMax_OCD_Domain, DIRECT
-  - RULE-SET, ChinaMax_OCD_IP, DIRECT, no-resolve
-  - GEOIP, CN, DIRECT
-  - MATCH, 兜底节点
+  - RULE-SET, AppleSoftwareUpdates,         DIRECT
+  - RULE-SET, AppleProxy,                   苹果境外
+  - RULE-SET, Apple,                        苹果
+  - RULE-SET, YouTube,                      谷歌
+  - RULE-SET, YouTubeMusic,                 谷歌
+  - RULE-SET, Google,                       谷歌
+  - RULE-SET, TelegramSG,                   🇸🇬新国节点
+  - RULE-SET, TelegramUS,                   🇺🇸美国节点
+  - RULE-SET, Telegram,                     电报
+  - RULE-SET, Microsoft,                    微软
+  - RULE-SET, ChinaDownloadCDN,             DIRECT
+  - RULE-SET, InternationalDownloadCDN,     境外下载
+  - RULE-SET, Cloudflarecn,                 DIRECT
+  - RULE-SET, Cloudflare,                   代理节点
+  - RULE-SET, GitHub,                       代理节点
+  - RULE-SET, Docker,                       代理节点
+  - RULE-SET, Twitter,                      代理节点
+  - RULE-SET, ChinaMax_OCD_Domain,          DIRECT
+  - RULE-SET, ChinaMax_OCD_IP,              DIRECT, no-resolve
+  - GEOIP,    CN,                           DIRECT
+  - MATCH,                                  兜底节点
+
+# 订阅规则
+rule-providers:
+  Lan:                          {<<: *YamlClass, path: './rules/Lan.yaml',                           url: 'https://rule.kelee.one/Clash/Lan.yaml'}
+  AI:                           {<<: *YamlClass, path: './rules/AI.yaml',                            url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'}
+  iCloudChina:                  {<<: *YamlClass, path: './rules/iCloudChina.yaml',                   url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml'}
+  AppleSoftwareUpdates:         {<<: *YamlClass, path: './rules/AppleSoftwareUpdates.yaml',          url: 'https://kelee.one/Tool/Clash/Rule/AppleSoftwareUpdates.yaml'}
+  ApplePushNotificationService: {<<: *YamlClass, path: './rules/ApplePushNotificationService.yaml',  url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml'}
+  AppleProxy:                   {<<: *YamlClass, path: './rules/AppleProxy.yaml',                    url: 'https://rule.kelee.one/Clash/AppleProxy.yaml'}
+  Apple:                        {<<: *YamlClass, path: './rules/Apple.yaml',                         url: 'https://rule.kelee.one/Clash/Apple.yaml'}
+  YouTube:                      {<<: *YamlClass, path: './rules/YouTube.yaml',                       url: 'https://rule.kelee.one/Clash/YouTube.yaml'}
+  YouTubeMusic:                 {<<: *YamlClass, path: './rules/YouTubeMusic.yaml',                  url: 'https://rule.kelee.one/Clash/YouTubeMusic.yaml'}
+  Google:                       {<<: *YamlClass, path: './rules/Google.yaml',                        url: 'https://rule.kelee.one/Clash/Google.yaml'}
+  TelegramSG:                   {<<: *YamlClass, path: './rules/TelegramSG.yaml',                    url: 'https://rule.kelee.one/Clash/TelegramSG.yaml'}
+  TelegramUS:                   {<<: *YamlClass, path: './rules/TelegramUS.yaml',                    url: 'https://rule.kelee.one/Clash/TelegramUS.yaml'}
+  Telegram:                     {<<: *YamlClass, path: './rules/Telegram.yaml',                      url: 'https://rule.kelee.one/Clash/Telegram.yaml'}
+  Microsoft:                    {<<: *YamlClass, path: './rules/Microsoft.yaml',                     url: 'https://rule.kelee.one/Clash/Microsoft.yaml'}
+  ChinaDownloadCDN:             {<<: *YamlClass, path: './rules/ChinaDownloadCDN.yaml',              url: 'https://kelee.one/Tool/Clash/Rule/ChinaDownloadCDN.yaml'}
+  InternationalDownloadCDN:     {<<: *YamlClass, path: './rules/InternationalDownloadCDN.yaml',      url: 'https://kelee.one/Tool/Clash/Rule/InternationalDownloadCDN.yaml'}
+  Cloudflarecn:                 {<<: *YamlClass, path: './rules/Cloudflarecn.yaml',                  url: 'https://rule.kelee.one/Clash/Cloudflarecn.yaml'}
+  Cloudflare:                   {<<: *YamlClass, path: './rules/Cloudflare.yaml',                    url: 'https://rule.kelee.one/Clash/Cloudflare.yaml'}
+  GitHub:                       {<<: *YamlClass, path: './rules/GitHub.yaml',                        url: 'https://rule.kelee.one/Clash/GitHub.yaml'}
+  Docker:                       {<<: *YamlClass, path: './rules/Docker.yaml',                        url: 'https://rule.kelee.one/Clash/Docker.yaml'}
+  Twitter:                      {<<: *YamlClass, path: './rules/Twitter.yaml',                       url: 'https://rule.kelee.one/Clash/Twitter.yaml'}
+  ChinaMax_OCD_Domain:          {<<: *MrsDomain, path: './rules/ChinaMax_OCD_Domain.mrs',            url: 'https://testingcf.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_Domain.mrs'}
+  ChinaMax_OCD_IP:              {<<: *MrsIP,     path: './rules/ChinaMax_OCD_IP.mrs',                url: 'https://testingcf.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_IP.mrs'}
+
 
 # https://rule.kelee.one/Clash/Lan.yaml, policy=DIRECT, tag=Lan.list, enabled=true
 # https://kelee.one/Tool/Clash/Rule/AI.yaml, policy=AIGC, tag=AI.list, enabled=true
