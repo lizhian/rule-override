@@ -62,7 +62,7 @@ proxy-groups:
   - {name: 谷歌,     <<: *ProxyFirst,  icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Google.png}
   - {name: 电报,     <<: *ProxyFirst,  icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png}
   - {name: 微软,     <<: *DirectFirst, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png}
-  - {name: 境外下载, <<: *DirectFirst, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png, include-all-providers: true, filter: *FilterAll}
+  - {name: 境外下载, <<: *DirectFirst, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png, filter: *FilterAll, include-all-providers: true, include-all: true}
 
 # 规则指向
 rules:
