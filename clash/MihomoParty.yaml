@@ -162,12 +162,12 @@ keep-alive-idle: 600
 keep-alive-interval: 30
 
 # 策略组选择和fakeip缓存
-profile:
+profile!:
   store-selected: true
   store-fake-ip: false
 
 # 流量嗅探
-sniffer:
+sniffer!:
   enable: true
   sniff:
     HTTP:
@@ -194,7 +194,7 @@ sniffer:
     - "*.sunlogin.net"
 
 # 代理模式
-tun:
+tun!:
   enable: true
   stack: system
   mtu: 9000
@@ -206,7 +206,7 @@ tun:
   auto-detect-interface: true
 
 # DNS模块
-dns:
+dns!:
   enable: true
   listen: 0.0.0.0:1053
   ipv6: true
