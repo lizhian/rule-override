@@ -28,12 +28,12 @@ proxy-groups:
   - {name: 手动节点,   type: select, include-all-providers: true, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png}
   - {name: 兜底节点,   type: select, proxies: [DIRECT, 手动节点, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
   # 地区
-  - {name: 🇭🇰香港节点, type: select, filter: *FilterHK, include-all-providers: true, proxies: [⏱️️香港时延优选, 🚥香港故障转移, 🎛香港负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
-  - {name: 🇨🇳台湾节点, type: select, filter: *FilterTW, include-all-providers: true, proxies: [⏱️️台湾时延优选, 🚥台湾故障转移, 🎛台湾负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png}
-  - {name: 🇯🇵日本节点, type: select, filter: *FilterJP, include-all-providers: true, proxies: [⏱️️日本时延优选, 🚥日本故障转移, 🎛日本负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png}
-  - {name: 🇰🇷韩国节点, type: select, filter: *FilterKR, include-all-providers: true, proxies: [⏱️️韩国时延优选, 🚥韩国故障转移, 🎛韩国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png}
-  - {name: 🇸🇬新国节点, type: select, filter: *FilterSG, include-all-providers: true, proxies: [⏱️️新国时延优选, 🚥新国故障转移, 🎛新国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png}
-  - {name: 🇺🇸美国节点, type: select, filter: *FilterUS, include-all-providers: true, proxies: [⏱️️美国时延优选, 🚥美国故障转移, 🎛美国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png}
+  - {name: 🇭🇰香港节点, type: select, filter: *FilterHK, include-all-providers: true, include-all: true, proxies: [⏱️️香港时延优选, 🚥香港故障转移, 🎛香港负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
+  - {name: 🇨🇳台湾节点, type: select, filter: *FilterTW, include-all-providers: true, include-all: true, proxies: [⏱️️台湾时延优选, 🚥台湾故障转移, 🎛台湾负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png}
+  - {name: 🇯🇵日本节点, type: select, filter: *FilterJP, include-all-providers: true, include-all: true, proxies: [⏱️️日本时延优选, 🚥日本故障转移, 🎛日本负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png}
+  - {name: 🇰🇷韩国节点, type: select, filter: *FilterKR, include-all-providers: true, include-all: true, proxies: [⏱️️韩国时延优选, 🚥韩国故障转移, 🎛韩国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png}
+  - {name: 🇸🇬新国节点, type: select, filter: *FilterSG, include-all-providers: true, include-all: true, proxies: [⏱️️新国时延优选, 🚥新国故障转移, 🎛新国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png}
+  - {name: 🇺🇸美国节点, type: select, filter: *FilterUS, include-all-providers: true, include-all: true, proxies: [⏱️️美国时延优选, 🚥美国故障转移, 🎛美国负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png}
   # 时延优选
   - {name: ⏱️️香港时延优选, <<: *UrlTest, filter: *FilterHK}
   - {name: ⏱️️台湾时延优选, <<: *UrlTest, filter: *FilterTW}
