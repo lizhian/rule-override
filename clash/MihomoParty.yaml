@@ -109,10 +109,10 @@ rules:
 # https://github.com/MetaCubeX/meta-rules-dat/tree/meta/geo/geosite
 rule-providers:
     # 旧规则
-  private_domain: {<<: *MrsDomain, path: './rules/private_domain.yaml', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/private.mrs'}
-  private_ip: {<<: *MrsIP, path: './rules/private_ip.yaml', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/private.mrs'}
-  ai_cn_domain: {<<: *MrsDomain, path: './rules/ai_cn_domain.yaml', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-cn.mrs'}
-  ai_!cn_domain: {<<: *MrsDomain, path: './rules/ai_!cn_domain.yaml', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-!cn.mrs'}
+  private_domain: {<<: *MrsDomain, path: './rules/private_domain.mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/private.mrs'}
+  private_ip: {<<: *MrsIP, path: './rules/private_ip.mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/private.mrs'}
+  ai_cn_domain: {<<: *MrsDomain, path: './rules/ai_cn_domain.mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-cn.mrs'}
+  ai_!cn_domain: {<<: *MrsDomain, path: './rules/ai_!cn_domain.mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-!cn.mrs'}
 
   Lan:                          {<<: *YamlClass, path: './rules/Lan.yaml',                           url: 'https://rule.kelee.one/Clash/Lan.yaml'}
   AI:                           {<<: *YamlClass, path: './rules/AI.yaml',                            url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'}
