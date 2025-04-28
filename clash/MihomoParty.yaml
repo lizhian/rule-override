@@ -21,7 +21,6 @@ ProxyFirst:  &ProxyFirst  {type: select, proxies: [代理节点, 🇭🇰香港�
 DirectFirst: &DirectFirst {type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
 # ================================ 锚点区结束 ================================
 
-
 # 策略组
 proxy-groups:
   # 主要
