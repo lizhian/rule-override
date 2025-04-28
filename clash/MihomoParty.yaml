@@ -11,9 +11,9 @@ UrlTest:     &UrlTest     {type: url-test,     interval: 6, lazy: true, url: 'ht
 FallBack:    &FallBack    {type: fallback,     interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, include-all: true}
 LoadBalance: &LoadBalance {type: load-balance, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, include-all: true, strategy: consistent-hashing}
 # 锚点 - 规则参数
-MrsIP:      &MrsIP      {format: mrs,  behavior: ipcidr,    type: http, interval: 3600, proxy: DIRECT}
-MrsClass:   &MrsDomain  {format: mrs,  behavior: classical, type: http, interval: 3600, proxy: DIRECT}
-MrsDomain:  &MrsDomain  {format: mrs,  behavior: domain,    type: http, interval: 3600, proxy: DIRECT}
+MrsIP:      &MrsIP      {format: mrs,  behavior: ipcidr,    type: http, interval: 3600, proxy: 代理节点}
+MrsClass:   &MrsDomain  {format: mrs,  behavior: classical, type: http, interval: 3600, proxy: 代理节点}
+MrsDomain:  &MrsDomain  {format: mrs,  behavior: domain,    type: http, interval: 3600, proxy: 代理节点}
 TextIP:     &TextIP     {format: text, behavior: ipcidr,    type: http, interval: 3600, proxy: DIRECT}
 TextClass:  &TextClass  {format: text, behavior: classical, type: http, interval: 3600, proxy: DIRECT}
 TextDomain: &TextDomain {format: text, behavior: domain,    type: http, interval: 3600, proxy: DIRECT}
@@ -72,19 +72,23 @@ proxy-groups:
 
 # 规则指向
 rules:
-  - RULE-SET, private_domain, DIRECT
-  - RULE-SET, private_ip, DIRECT, no-resolve
-  - RULE-SET, ai_cn_domain, DIRECT
-  - RULE-SET, ai_!cn_domain, AIGC
+  - RULE-SET, private_domain,       DIRECT
+  - RULE-SET, private_ip,           DIRECT, no-resolve
+  - RULE-SET, ai_cn_domain,         DIRECT
+  - RULE-SET, ai_!cn_domain,        AIGC
+  - RULE-SET, apple_cn_domain,      DIRECT
+  - RULE-SET, apple_proxy_domain,   苹果境外
+  - RULE-SET, apple_domain,         苹果
+  - RULE-SET, apple_ip,             苹果, no_resolve
 
 
-  - RULE-SET, Lan,                          DIRECT
-  - RULE-SET, AI,                           AIGC
-  - RULE-SET, iCloudChina,                  DIRECT
-  - RULE-SET, ApplePushNotificationService, DIRECT
-  - RULE-SET, AppleSoftwareUpdates,         DIRECT
-  - RULE-SET, AppleProxy,                   苹果境外
-  - RULE-SET, Apple,                        苹果
+  # - RULE-SET, Lan,                          DIRECT
+  # - RULE-SET, AI,                           AIGC
+  # - RULE-SET, iCloudChina,                  DIRECT
+  # - RULE-SET, ApplePushNotificationService, DIRECT
+  # - RULE-SET, AppleSoftwareUpdates,         DIRECT
+  # - RULE-SET, AppleProxy,                   苹果境外
+  # - RULE-SET, Apple,                        苹果
   - RULE-SET, YouTube,                      谷歌
   - RULE-SET, YouTubeMusic,                 谷歌
   - RULE-SET, Google,                       谷歌
@@ -109,18 +113,26 @@ rules:
 # https://github.com/MetaCubeX/meta-rules-dat/tree/meta/geo/geosite
 rule-providers:
     # 旧规则
-  private_domain: {<<: *MrsDomain, path: './rules/private_domain.mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/private.mrs'}
-  private_ip: {<<: *MrsIP, path: './rules/private_ip.mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/private.mrs'}
-  ai_cn_domain: {<<: *MrsDomain, path: './rules/ai_cn_domain.mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-cn.mrs'}
-  ai_!cn_domain: {<<: *MrsDomain, path: './rules/ai_!cn_domain.mrs', url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-!cn.mrs'}
+  private_domain:       {<<: *MrsDomain,    path: './rules/private_domain.mrs',     url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.mrs'}
+  private_ip:           {<<: *MrsIP,        path: './rules/private_ip.mrs',         url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/private.mrs'}
+  ai_cn_domain:         {<<: *MrsDomain,    path: './rules/ai_cn_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ai-cn.mrs'}
+  ai_!cn_domain:        {<<: *MrsDomain,    path: './rules/ai_!cn_domain.mrs',      url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ai-!cn.mrs'}
+  apple_cn_domain:      {<<: *MrsDomain,    path: './rules/apple_cn_domain.mrs',    url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple-cn.mrs'}
+  apple_proxy_domain:   {<<: *MrsDomain,    path: './rules/apple_proxy_domain.mrs', url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/AppleProxy/AppleProxy_OCD_Domain.mrs'}
+  apple_domain:         {<<: *MrsDomain,    path: './rules/apple_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple.mrs'}
+  apple_ip:             {<<: *MrsIP,        path: './rules/apple_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geoip/apple.mrs'}
 
-  Lan:                          {<<: *YamlClass, path: './rules/Lan.yaml',                           url: 'https://rule.kelee.one/Clash/Lan.yaml'}
-  AI:                           {<<: *YamlClass, path: './rules/AI.yaml',                            url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'}
-  iCloudChina:                  {<<: *YamlClass, path: './rules/iCloudChina.yaml',                   url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml'}
-  AppleSoftwareUpdates:         {<<: *YamlClass, path: './rules/AppleSoftwareUpdates.yaml',          url: 'https://kelee.one/Tool/Clash/Rule/AppleSoftwareUpdates.yaml'}
-  ApplePushNotificationService: {<<: *YamlClass, path: './rules/ApplePushNotificationService.yaml',  url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml'}
-  AppleProxy:                   {<<: *YamlClass, path: './rules/AppleProxy.yaml',                    url: 'https://rule.kelee.one/Clash/AppleProxy.yaml'}
-  Apple:                        {<<: *YamlClass, path: './rules/Apple.yaml',                         url: 'https://rule.kelee.one/Clash/Apple.yaml'}
+
+
+
+
+  # Lan:                          {<<: *YamlClass, path: './rules/Lan.yaml',                           url: 'https://rule.kelee.one/Clash/Lan.yaml'}
+  # AI:                           {<<: *YamlClass, path: './rules/AI.yaml',                            url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'}
+  # iCloudChina:                  {<<: *YamlClass, path: './rules/iCloudChina.yaml',                   url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml'}
+  # AppleSoftwareUpdates:         {<<: *YamlClass, path: './rules/AppleSoftwareUpdates.yaml',          url: 'https://kelee.one/Tool/Clash/Rule/AppleSoftwareUpdates.yaml'}
+  # ApplePushNotificationService: {<<: *YamlClass, path: './rules/ApplePushNotificationService.yaml',  url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml'}
+  # AppleProxy:                   {<<: *YamlClass, path: './rules/AppleProxy.yaml',                    url: 'https://rule.kelee.one/Clash/AppleProxy.yaml'}
+  # Apple:                        {<<: *YamlClass, path: './rules/Apple.yaml',                         url: 'https://rule.kelee.one/Clash/Apple.yaml'}
   YouTube:                      {<<: *YamlClass, path: './rules/YouTube.yaml',                       url: 'https://rule.kelee.one/Clash/YouTube.yaml'}
   YouTubeMusic:                 {<<: *YamlClass, path: './rules/YouTubeMusic.yaml',                  url: 'https://rule.kelee.one/Clash/YouTubeMusic.yaml'}
   Google:                       {<<: *YamlClass, path: './rules/Google.yaml',                        url: 'https://rule.kelee.one/Clash/Google.yaml'}
@@ -135,6 +147,6 @@ rule-providers:
   GitHub:                       {<<: *YamlClass, path: './rules/GitHub.yaml',                        url: 'https://rule.kelee.one/Clash/GitHub.yaml'}
   Docker:                       {<<: *YamlClass, path: './rules/Docker.yaml',                        url: 'https://rule.kelee.one/Clash/Docker.yaml'}
   Twitter:                      {<<: *YamlClass, path: './rules/Twitter.yaml',                       url: 'https://rule.kelee.one/Clash/Twitter.yaml'}
-  ChinaMax_OCD_Domain:          {<<: *MrsDomain, path: './rules/ChinaMax_OCD_Domain.mrs',            url: 'https://testingcf.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_Domain.mrs'}
-  ChinaMax_OCD_IP:              {<<: *MrsIP,     path: './rules/ChinaMax_OCD_IP.mrs',                url: 'https://testingcf.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_IP.mrs'}
+  ChinaMax_OCD_Domain:          {<<: *MrsDomain, path: './rules/ChinaMax_OCD_Domain.mrs',            url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_Domain.mrs'}
+  ChinaMax_OCD_IP:              {<<: *MrsIP,     path: './rules/ChinaMax_OCD_IP.mrs',                url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_IP.mrs'}
 
