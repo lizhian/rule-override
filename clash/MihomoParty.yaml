@@ -14,9 +14,9 @@ UrlTest:     &UrlTest     {type: url-test,     interval: 6, lazy: true, url: 'ht
 FallBack:    &FallBack    {type: fallback,     interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, include-all: true}
 LoadBalance: &LoadBalance {type: load-balance, interval: 6, lazy: true, url: 'http://www.google.com/blank.html', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, include-all: true, strategy: consistent-hashing}
 # 锚点 - 规则参数
-MrsIP:      &MrsIP      {format: mrs,  behavior: ipcidr,    type: http, interval: 3600, proxy: 代理节点}
-MrsClass:   &MrsDomain  {format: mrs,  behavior: classical, type: http, interval: 3600, proxy: 代理节点}
-MrsDomain:  &MrsDomain  {format: mrs,  behavior: domain,    type: http, interval: 3600, proxy: 代理节点}
+MrsIP:      &MrsIP      {format: mrs,  behavior: ipcidr,    type: http, interval: 3600, proxy: DIRECT}
+MrsClass:   &MrsDomain  {format: mrs,  behavior: classical, type: http, interval: 3600, proxy: DIRECT}
+MrsDomain:  &MrsDomain  {format: mrs,  behavior: domain,    type: http, interval: 3600, proxy: DIRECT}
 TextIP:     &TextIP     {format: text, behavior: ipcidr,    type: http, interval: 3600, proxy: DIRECT}
 TextClass:  &TextClass  {format: text, behavior: classical, type: http, interval: 3600, proxy: DIRECT}
 TextDomain: &TextDomain {format: text, behavior: domain,    type: http, interval: 3600, proxy: DIRECT}
