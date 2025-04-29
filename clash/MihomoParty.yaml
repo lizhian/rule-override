@@ -137,20 +137,20 @@ rules:
   # - RULE-SET, Microsoft,                    微软
   # - RULE-SET, ChinaDownloadCDN,             DIRECT
   # - RULE-SET, InternationalDownloadCDN,     境外下载
-  - RULE-SET, Cloudflarecn,                 DIRECT
-  - RULE-SET, Cloudflare,                   代理节点
-  - RULE-SET, GitHub,                       代理节点
-  - RULE-SET, Docker,                       代理节点
-  - RULE-SET, Twitter,                      代理节点
-  - RULE-SET, ChinaMax_OCD_Domain,          DIRECT
-  - RULE-SET, ChinaMax_OCD_IP,              DIRECT, no-resolve
-  - GEOIP,    CN,                           DIRECT
-  - MATCH,                                  兜底节点
-  - GEOSITE,gfw,节点选择
-  - GEOSITE,geolocation-!cn,节点选择
-  - GEOSITE,cn,全球直连
-  - GEOIP,private,全球直连,no-resolve
-  - GEOIP,cn,全球直连,no-resolve
+#   - RULE-SET, Cloudflarecn,                 DIRECT
+#   - RULE-SET, Cloudflare,                   代理节点
+#   - RULE-SET, GitHub,                       代理节点
+#   - RULE-SET, Docker,                       代理节点
+#   - RULE-SET, Twitter,                      代理节点
+#   - RULE-SET, ChinaMax_OCD_Domain,          DIRECT
+#   - RULE-SET, ChinaMax_OCD_IP,              DIRECT, no-resolve
+#   - GEOIP,    CN,                           DIRECT
+#   - MATCH,                                  兜底节点
+#   - GEOSITE,gfw,节点选择
+#   - GEOSITE,geolocation-!cn,节点选择
+#   - GEOSITE,cn,全球直连
+#   - GEOIP,private,全球直连,no-resolve
+#   - GEOIP,cn,全球直连,no-resolve
 
 # 订阅规则
 # https://github.com/peiyingyao/Rule-for-OCD/tree/master/rule/Clash
