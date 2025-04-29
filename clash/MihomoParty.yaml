@@ -35,7 +35,7 @@ proxy-groups:
   # 主要
   - {name: 代理节点,   type: select, proxies: [手动节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png}
   - {name: 手动节点,   type: select, filter: *FilterAll, include-all-providers: true, include-all: true, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png}
-  - {name: 广告节点,   type: select, proxies: [DIRECT, REJECT], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
+  - {name: 广告节点,   type: select, proxies: [DIRECT, REJECT], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Adblock.png}
   - {name: 兜底节点,   type: select, proxies: [DIRECT, 手动节点, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
   # 地区
   - {name: 🇭🇰香港节点, type: select, filter: *FilterHK, include-all-providers: true, include-all: true, proxies: [⏱️️香港时延优选, 🚥香港故障转移, 🎛香港负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
@@ -72,135 +72,49 @@ proxy-groups:
   - {name: 谷歌,     <<: *ProxyFirst,  icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Google.png}
   - {name: 电报,     <<: *ProxyFirst,  icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png}
   - {name: 微软,     <<: *DirectFirst, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png}
-  - {name: 境外下载, <<: *DirectFirst, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png, filter: *FilterAll, include-all-providers: true, include-all: true}
 
 # 规则指向
 rules:
+  # 广告
   - GEOSITE,    category-ads-all,  广告节点
+  # 局域网
   - GEOSITE,    private,           DIRECT
-  - GEOIP,      private,           DIRECT,  no-resolve
+  - GEOIP,      private,           DIRECT,no-resolve
+  # AI
   - GEOSITE,    category-ai-cn,    DIRECT
   - GEOSITE,    category-ai-!cn,   AIGC
+  # 苹果
   - GEOSITE,    apple-cn,          DIRECT
-  - RULE-SET,   apple_domain_proxy,苹果
+  - RULE-SET,   apple_proxy,       苹果
   - GEOSITE,    apple,             苹果
   - GEOIP,      apple,             苹果,no_resolve
+  # 谷歌
   - GEOSITE,    google,            谷歌
   - GEOIP,      google,            谷歌,no_resolve
-  - GEOSITE,    telegram,            电报
-  - GEOIP,      telegram,            电报,no_resolve
-  - GEOSITE,    microsoft@cn,         DIRECT
-  - GEOSITE,    microsoft,            微软
-  - GEOIP,      microsoft,            微软,no_resolve
+  # 电报
+  - GEOSITE,    telegram,          电报
+  - GEOIP,      telegram,          电报,no_resolve
+  # 微软
+  - GEOSITE,    microsoft@cn,      DIRECT
+  - GEOSITE,    microsoft,         微软
+  # cloudflare
+  - GEOSITE,    cloudflare-cn,     DIRECT
+  - GEOSITE,    cloudflare,        代理节点
+  - GEOIP,      cloudflare,        代理节点
+  # github
+  - GEOSITE,    github,            代理节点
+  # docker
+  - GEOSITE,    docker,            代理节点
+  # 国内
   - GEOSITE,    cn,                 DIRECT
-  - GEOIP,      cn,             DIRECT,no-resolve
+  - GEOIP,      cn,                 DIRECT,no-resolve
+  # 其余
   - MATCH,兜底节点
-
-
-
-
-
-
-
-
-
-#   - RULE-SET, private_domain,       DIRECT
-#   - RULE-SET, private_ip,           DIRECT, no-resolve
-#   - RULE-SET, ai_domain_cn,         DIRECT
-#   - RULE-SET, ai_domain,        AIGC
-#   - RULE-SET, apple_cn_domain,      DIRECT
-#   - RULE-SET, apple_proxy_domain,   苹果境外
-#   - RULE-SET, apple_domain,         苹果
-#   - RULE-SET, apple_ip,             苹果, no_resolve
-#   - RULE-SET, google_domain,         谷歌
-#   - RULE-SET, google_ip,             谷歌, no_resolve
-#   - RULE-SET, telegram_domain,         电报
-#   - RULE-SET, telegram_ip,             电报, no_resolve
-#   - RULE-SET, microsoft_cn_domain,         DIRECT
-#   - RULE-SET, microsoft_domain,         微软
-#   - RULE-SET, microsoft_ip,             微软, no_resolve
-
-
-  # - RULE-SET, Lan,                          DIRECT
-  # - RULE-SET, AI,                           AIGC
-  # - RULE-SET, iCloudChina,                  DIRECT
-  # - RULE-SET, ApplePushNotificationService, DIRECT
-  # - RULE-SET, AppleSoftwareUpdates,         DIRECT
-  # - RULE-SET, AppleProxy,                   苹果境外
-  # - RULE-SET, Apple,                        苹果
-  # - RULE-SET, YouTube,                      谷歌
-  # - RULE-SET, YouTubeMusic,                 谷歌
-  # - RULE-SET, Google,                       谷歌
-  # - RULE-SET, TelegramSG,                   🇸🇬新国节点
-  # - RULE-SET, TelegramUS,                   🇺🇸美国节点
-  #- RULE-SET, Telegram,                     电报
-  # - RULE-SET, Microsoft,                    微软
-  # - RULE-SET, ChinaDownloadCDN,             DIRECT
-  # - RULE-SET, InternationalDownloadCDN,     境外下载
-#   - RULE-SET, Cloudflarecn,                 DIRECT
-#   - RULE-SET, Cloudflare,                   代理节点
-#   - RULE-SET, GitHub,                       代理节点
-#   - RULE-SET, Docker,                       代理节点
-#   - RULE-SET, Twitter,                      代理节点
-#   - RULE-SET, ChinaMax_OCD_Domain,          DIRECT
-#   - RULE-SET, ChinaMax_OCD_IP,              DIRECT, no-resolve
-#   - GEOIP,    CN,                           DIRECT
-#   - MATCH,                                  兜底节点
-#   - GEOSITE,gfw,节点选择
-#   - GEOSITE,geolocation-!cn,节点选择
-#   - GEOSITE,cn,全球直连
-#   - GEOIP,private,全球直连,no-resolve
-#   - GEOIP,cn,全球直连,no-resolve
-
 # 订阅规则
 # https://github.com/peiyingyao/Rule-for-OCD/tree/master/rule/Clash
 # https://github.com/MetaCubeX/meta-rules-dat/tree/meta/geo/geosite
 rule-providers:
-    # 旧规则
-  apple_domain_proxy:   {<<: *MrsDomain,    path: './rules/apple_domain_proxy.mrs', url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/AppleProxy/AppleProxy_OCD_Domain.mrs'}
-#   apple_domain:         {<<: *MrsDomain,    path: './rules/apple_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple.mrs'}
-#   apple_ip:             {<<: *MrsIP,        path: './rules/apple_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geoip/apple.mrs'}
-#   google_domain:         {<<: *MrsDomain,    path: './rules/google_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.mrs'}
-#   google_ip:             {<<: *MrsIP,        path: './rules/google_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.mrs'}
-#   telegram_domain:         {<<: *MrsDomain,    path: './rules/telegram_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.mrs'}
-#   telegram_ip:             {<<: *MrsIP,        path: './rules/telegram_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.mrs'}
-#   microsoft_domain_cn:         {<<: *MrsDomain,    path: './rules/microsoft_domain_cn.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft@cn.mrs'}
-#   microsoft_domain:         {<<: *MrsDomain,    path: './rules/microsoft_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft.mrs'}
-#   microsoft_ip:             {<<: *MrsIP,        path: './rules/microsoft_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geoip/microsoft.mrs'}
-#
-#   cloudflare_domain_cn:         {<<: *MrsDomain,    path: './rules/cloudflare_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare-cn.mrs'}
-#   cloudflare_domain:         {<<: *MrsDomain,    path: './rules/cloudflare_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare.mrs'}
-#   cloudflare_ip:         {<<: *MrsIP,    path: './rules/cloudflare_ip.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cloudflare.mrs'}
-#   github_domain:         {<<: *MrsDomain,    path: './rules/github_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/github.mrs'}
-#   docker_domain:         {<<: *MrsDomain,    path: './rules/docker_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/docker.mrs'}
-
-
-
-
-
-  # Lan:                          {<<: *YamlClass, path: './rules/Lan.yaml',                           url: 'https://rule.kelee.one/Clash/Lan.yaml'}
-  # AI:                           {<<: *YamlClass, path: './rules/AI.yaml',                            url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'}
-  # iCloudChina:                  {<<: *YamlClass, path: './rules/iCloudChina.yaml',                   url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml'}
-  # AppleSoftwareUpdates:         {<<: *YamlClass, path: './rules/AppleSoftwareUpdates.yaml',          url: 'https://kelee.one/Tool/Clash/Rule/AppleSoftwareUpdates.yaml'}
-  # ApplePushNotificationService: {<<: *YamlClass, path: './rules/ApplePushNotificationService.yaml',  url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml'}
-  # AppleProxy:                   {<<: *YamlClass, path: './rules/AppleProxy.yaml',                    url: 'https://rule.kelee.one/Clash/AppleProxy.yaml'}
-  # Apple:                        {<<: *YamlClass, path: './rules/Apple.yaml',                         url: 'https://rule.kelee.one/Clash/Apple.yaml'}
-  # YouTube:                      {<<: *YamlClass, path: './rules/YouTube.yaml',                       url: 'https://rule.kelee.one/Clash/YouTube.yaml'}
-  # YouTubeMusic:                 {<<: *YamlClass, path: './rules/YouTubeMusic.yaml',                  url: 'https://rule.kelee.one/Clash/YouTubeMusic.yaml'}
-  # Google:                       {<<: *YamlClass, path: './rules/Google.yaml',                        url: 'https://rule.kelee.one/Clash/Google.yaml'}
-  # TelegramSG:                   {<<: *YamlClass, path: './rules/TelegramSG.yaml',                    url: 'https://rule.kelee.one/Clash/TelegramSG.yaml'}
-  # TelegramUS:                   {<<: *YamlClass, path: './rules/TelegramUS.yaml',                    url: 'https://rule.kelee.one/Clash/TelegramUS.yaml'}
-  # Telegram:                     {<<: *YamlClass, path: './rules/Telegram.yaml',                      url: 'https://rule.kelee.one/Clash/Telegram.yaml'}
-  # Microsoft:                    {<<: *YamlClass, path: './rules/Microsoft.yaml',                     url: 'https://rule.kelee.one/Clash/Microsoft.yaml'}
-  # ChinaDownloadCDN:             {<<: *YamlClass, path: './rules/ChinaDownloadCDN.yaml',              url: 'https://kelee.one/Tool/Clash/Rule/ChinaDownloadCDN.yaml'}
-  # InternationalDownloadCDN:     {<<: *YamlClass, path: './rules/InternationalDownloadCDN.yaml',      url: 'https://kelee.one/Tool/Clash/Rule/InternationalDownloadCDN.yaml'}
-  # Cloudflarecn:                 {<<: *YamlClass, path: './rules/Cloudflarecn.yaml',                  url: 'https://rule.kelee.one/Clash/Cloudflarecn.yaml'}
-  # Cloudflare:                   {<<: *YamlClass, path: './rules/Cloudflare.yaml',                    url: 'https://rule.kelee.one/Clash/Cloudflare.yaml'}
-  # GitHub:                       {<<: *YamlClass, path: './rules/GitHub.yaml',                        url: 'https://rule.kelee.one/Clash/GitHub.yaml'}
-  # Docker:                       {<<: *YamlClass, path: './rules/Docker.yaml',                        url: 'https://rule.kelee.one/Clash/Docker.yaml'}
-#   Twitter:                      {<<: *YamlClass, path: './rules/Twitter.yaml',                       url: 'https://rule.kelee.one/Clash/Twitter.yaml'}
-#   ChinaMax_OCD_Domain:          {<<: *MrsDomain, path: './rules/ChinaMax_OCD_Domain.mrs',            url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_Domain.mrs'}
-#   ChinaMax_OCD_IP:              {<<: *MrsIP,     path: './rules/ChinaMax_OCD_IP.mrs',                url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_IP.mrs'}
+  apple_proxy:   {<<: *MrsDomain,    path: './rules/apple_domain_proxy.mrs', url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/AppleProxy/AppleProxy_OCD_Domain.mrs'}
 
 
 # 全局配置
