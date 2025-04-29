@@ -35,6 +35,7 @@ proxy-groups:
   # 主要
   - {name: 代理节点,   type: select, proxies: [手动节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png}
   - {name: 手动节点,   type: select, filter: *FilterAll, include-all-providers: true, include-all: true, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png}
+  - {name: 广告节点,   type: select, proxies: [DIRECT, REJECT], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
   - {name: 兜底节点,   type: select, proxies: [DIRECT, 手动节点, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png}
   # 地区
   - {name: 🇭🇰香港节点, type: select, filter: *FilterHK, include-all-providers: true, include-all: true, proxies: [⏱️️香港时延优选, 🚥香港故障转移, 🎛香港负载均衡], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
@@ -75,21 +76,49 @@ proxy-groups:
 
 # 规则指向
 rules:
-  - RULE-SET, private_domain,       DIRECT
-  - RULE-SET, private_ip,           DIRECT, no-resolve
-  - RULE-SET, ai_domain_cn,         DIRECT
-  - RULE-SET, ai_domain,        AIGC
-  - RULE-SET, apple_cn_domain,      DIRECT
-  - RULE-SET, apple_proxy_domain,   苹果境外
-  - RULE-SET, apple_domain,         苹果
-  - RULE-SET, apple_ip,             苹果, no_resolve
-  - RULE-SET, google_domain,         谷歌
-  - RULE-SET, google_ip,             谷歌, no_resolve
-  - RULE-SET, telegram_domain,         电报
-  - RULE-SET, telegram_ip,             电报, no_resolve
-  - RULE-SET, microsoft_cn_domain,         DIRECT
-  - RULE-SET, microsoft_domain,         微软
-  - RULE-SET, microsoft_ip,             微软, no_resolve
+  - GEOSITE,    category-ads-all,  广告节点
+  - GEOSITE,    private,           DIRECT
+  - GEOIP,      private,           DIRECT,  no-resolve
+  - GEOSITE,    category-ai-cn,    DIRECT
+  - GEOSITE,    category-ai-!cn,   AIGC
+  - GEOSITE,    apple-cn,          DIRECT
+  - RULE-SET,   apple_domain_proxy,苹果
+  - GEOSITE,    apple,             苹果
+  - GEOIP,      apple,             苹果,no_resolve
+  - GEOSITE,    google,            谷歌
+  - GEOIP,      google,            谷歌,no_resolve
+  - GEOSITE,    telegram,            电报
+  - GEOIP,      telegram,            电报,no_resolve
+  - GEOSITE,    microsoft@cn,         DIRECT
+  - GEOSITE,    microsoft,            微软
+  - GEOIP,      microsoft,            微软,no_resolve
+  - GEOSITE,    cn,                 DIRECT
+  - GEOIP,      cn,             DIRECT,no-resolve
+  - MATCH,兜底节点
+
+
+
+
+
+
+
+
+
+#   - RULE-SET, private_domain,       DIRECT
+#   - RULE-SET, private_ip,           DIRECT, no-resolve
+#   - RULE-SET, ai_domain_cn,         DIRECT
+#   - RULE-SET, ai_domain,        AIGC
+#   - RULE-SET, apple_cn_domain,      DIRECT
+#   - RULE-SET, apple_proxy_domain,   苹果境外
+#   - RULE-SET, apple_domain,         苹果
+#   - RULE-SET, apple_ip,             苹果, no_resolve
+#   - RULE-SET, google_domain,         谷歌
+#   - RULE-SET, google_ip,             谷歌, no_resolve
+#   - RULE-SET, telegram_domain,         电报
+#   - RULE-SET, telegram_ip,             电报, no_resolve
+#   - RULE-SET, microsoft_cn_domain,         DIRECT
+#   - RULE-SET, microsoft_domain,         微软
+#   - RULE-SET, microsoft_ip,             微软, no_resolve
 
 
   # - RULE-SET, Lan,                          DIRECT
@@ -128,27 +157,22 @@ rules:
 # https://github.com/MetaCubeX/meta-rules-dat/tree/meta/geo/geosite
 rule-providers:
     # 旧规则
-  private_domain:       {<<: *MrsDomain,    path: './rules/private_domain.mrs',     url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.mrs'}
-  private_ip:           {<<: *MrsIP,        path: './rules/private_ip.mrs',         url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/private.mrs'}
-  ai_domain_cn:         {<<: *MrsDomain,    path: './rules/ai_domain_cn.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ai-cn.mrs'}
-  ai_domain:        {<<: *MrsDomain,    path: './rules/ai_domain.mrs',      url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ai-!cn.mrs'}
-  apple_domain_cn:      {<<: *MrsDomain,    path: './rules/apple_domain_cn.mrs',    url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple-cn.mrs'}
   apple_domain_proxy:   {<<: *MrsDomain,    path: './rules/apple_domain_proxy.mrs', url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/AppleProxy/AppleProxy_OCD_Domain.mrs'}
-  apple_domain:         {<<: *MrsDomain,    path: './rules/apple_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple.mrs'}
-  apple_ip:             {<<: *MrsIP,        path: './rules/apple_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geoip/apple.mrs'}
-  google_domain:         {<<: *MrsDomain,    path: './rules/google_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.mrs'}
-  google_ip:             {<<: *MrsIP,        path: './rules/google_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.mrs'}
-  telegram_domain:         {<<: *MrsDomain,    path: './rules/telegram_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.mrs'}
-  telegram_ip:             {<<: *MrsIP,        path: './rules/telegram_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.mrs'}
-  microsoft_domain_cn:         {<<: *MrsDomain,    path: './rules/microsoft_domain_cn.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft@cn.mrs'}
-  microsoft_domain:         {<<: *MrsDomain,    path: './rules/microsoft_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft.mrs'}
-  microsoft_ip:             {<<: *MrsIP,        path: './rules/microsoft_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geoip/microsoft.mrs'}
-
-  cloudflare_domain_cn:         {<<: *MrsDomain,    path: './rules/cloudflare_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare-cn.mrs'}
-  cloudflare_domain:         {<<: *MrsDomain,    path: './rules/cloudflare_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare.mrs'}
-  cloudflare_ip:         {<<: *MrsIP,    path: './rules/cloudflare_ip.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cloudflare.mrs'}
-  github_domain:         {<<: *MrsDomain,    path: './rules/github_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/github.mrs'}
-  docker_domain:         {<<: *MrsDomain,    path: './rules/docker_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/docker.mrs'}
+#   apple_domain:         {<<: *MrsDomain,    path: './rules/apple_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple.mrs'}
+#   apple_ip:             {<<: *MrsIP,        path: './rules/apple_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geoip/apple.mrs'}
+#   google_domain:         {<<: *MrsDomain,    path: './rules/google_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.mrs'}
+#   google_ip:             {<<: *MrsIP,        path: './rules/google_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.mrs'}
+#   telegram_domain:         {<<: *MrsDomain,    path: './rules/telegram_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.mrs'}
+#   telegram_ip:             {<<: *MrsIP,        path: './rules/telegram_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/telegram.mrs'}
+#   microsoft_domain_cn:         {<<: *MrsDomain,    path: './rules/microsoft_domain_cn.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft@cn.mrs'}
+#   microsoft_domain:         {<<: *MrsDomain,    path: './rules/microsoft_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft.mrs'}
+#   microsoft_ip:             {<<: *MrsIP,        path: './rules/microsoft_ip.mrs',           url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geoip/microsoft.mrs'}
+#
+#   cloudflare_domain_cn:         {<<: *MrsDomain,    path: './rules/cloudflare_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare-cn.mrs'}
+#   cloudflare_domain:         {<<: *MrsDomain,    path: './rules/cloudflare_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare.mrs'}
+#   cloudflare_ip:         {<<: *MrsIP,    path: './rules/cloudflare_ip.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cloudflare.mrs'}
+#   github_domain:         {<<: *MrsDomain,    path: './rules/github_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/github.mrs'}
+#   docker_domain:         {<<: *MrsDomain,    path: './rules/docker_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/docker.mrs'}
 
 
 
@@ -174,7 +198,9 @@ rule-providers:
   # Cloudflare:                   {<<: *YamlClass, path: './rules/Cloudflare.yaml',                    url: 'https://rule.kelee.one/Clash/Cloudflare.yaml'}
   # GitHub:                       {<<: *YamlClass, path: './rules/GitHub.yaml',                        url: 'https://rule.kelee.one/Clash/GitHub.yaml'}
   # Docker:                       {<<: *YamlClass, path: './rules/Docker.yaml',                        url: 'https://rule.kelee.one/Clash/Docker.yaml'}
-  Twitter:                      {<<: *YamlClass, path: './rules/Twitter.yaml',                       url: 'https://rule.kelee.one/Clash/Twitter.yaml'}
-  ChinaMax_OCD_Domain:          {<<: *MrsDomain, path: './rules/ChinaMax_OCD_Domain.mrs',            url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_Domain.mrs'}
-  ChinaMax_OCD_IP:              {<<: *MrsIP,     path: './rules/ChinaMax_OCD_IP.mrs',                url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_IP.mrs'}
+#   Twitter:                      {<<: *YamlClass, path: './rules/Twitter.yaml',                       url: 'https://rule.kelee.one/Clash/Twitter.yaml'}
+#   ChinaMax_OCD_Domain:          {<<: *MrsDomain, path: './rules/ChinaMax_OCD_Domain.mrs',            url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_Domain.mrs'}
+#   ChinaMax_OCD_IP:              {<<: *MrsIP,     path: './rules/ChinaMax_OCD_IP.mrs',                url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_IP.mrs'}
+
+
 
