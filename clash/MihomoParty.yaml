@@ -117,6 +117,11 @@ rules:
   - RULE-SET, ChinaMax_OCD_IP,              DIRECT, no-resolve
   - GEOIP,    CN,                           DIRECT
   - MATCH,                                  兜底节点
+  - GEOSITE,gfw,节点选择
+  - GEOSITE,geolocation-!cn,节点选择
+  - GEOSITE,cn,全球直连
+  - GEOIP,private,全球直连,no-resolve
+  - GEOIP,cn,全球直连,no-resolve
 
 # 订阅规则
 # https://github.com/peiyingyao/Rule-for-OCD/tree/master/rule/Clash
@@ -143,6 +148,7 @@ rule-providers:
   cloudflare_domain:         {<<: *MrsDomain,    path: './rules/cloudflare_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cloudflare.mrs'}
   cloudflare_ip:         {<<: *MrsIP,    path: './rules/cloudflare_ip.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cloudflare.mrs'}
   github_domain:         {<<: *MrsDomain,    path: './rules/github_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/github.mrs'}
+  docker_domain:         {<<: *MrsDomain,    path: './rules/docker_domain.mrs',       url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/docker.mrs'}
 
 
 
@@ -167,7 +173,7 @@ rule-providers:
   # Cloudflarecn:                 {<<: *YamlClass, path: './rules/Cloudflarecn.yaml',                  url: 'https://rule.kelee.one/Clash/Cloudflarecn.yaml'}
   # Cloudflare:                   {<<: *YamlClass, path: './rules/Cloudflare.yaml',                    url: 'https://rule.kelee.one/Clash/Cloudflare.yaml'}
   # GitHub:                       {<<: *YamlClass, path: './rules/GitHub.yaml',                        url: 'https://rule.kelee.one/Clash/GitHub.yaml'}
-  Docker:                       {<<: *YamlClass, path: './rules/Docker.yaml',                        url: 'https://rule.kelee.one/Clash/Docker.yaml'}
+  # Docker:                       {<<: *YamlClass, path: './rules/Docker.yaml',                        url: 'https://rule.kelee.one/Clash/Docker.yaml'}
   Twitter:                      {<<: *YamlClass, path: './rules/Twitter.yaml',                       url: 'https://rule.kelee.one/Clash/Twitter.yaml'}
   ChinaMax_OCD_Domain:          {<<: *MrsDomain, path: './rules/ChinaMax_OCD_Domain.mrs',            url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_Domain.mrs'}
   ChinaMax_OCD_IP:              {<<: *MrsIP,     path: './rules/ChinaMax_OCD_IP.mrs',                url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/ChinaMax/ChinaMax_OCD_IP.mrs'}
