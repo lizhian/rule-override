@@ -111,7 +111,7 @@ rules:
 # https://github.com/peiyingyao/Rule-for-OCD/tree/master/rule/Clash
 # https://github.com/MetaCubeX/meta-rules-dat/tree/meta/geo/geosite
 rule-providers:
-  apple_proxy:   {<<: *MrsDomain,    path: './rules/apple_domain_proxy.mrs', url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/AppleProxy/AppleProxy_OCD_Domain.mrs'}
+  apple_proxy:   {<<: *MrsDomain,    path: './rules/apple_proxy.mrs', url: 'https://cdn.jsdelivr.net/gh/peiyingyao/Rule-for-OCD@master/rule/Clash/AppleProxy/AppleProxy_OCD_Domain.mrs'}
 
 
 # 全局配置
