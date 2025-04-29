@@ -24,7 +24,6 @@ YamlDomain: &YamlDomain {format: yaml, behavior: domain,    type: http, interval
 ProxyNation: &ProxyNation [🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]
 ProxyFirst:  &ProxyFirst  {type: select, proxies: [代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
 DirectFirst: &DirectFirst {type: select, proxies: [DIRECT, 代理节点, 🇭🇰香港节点, 🇨🇳台湾节点, 🇯🇵日本节点, 🇰🇷韩国节点, 🇸🇬新国节点, 🇺🇸美国节点]}
-
 # ================================ 上面为锚点区 ================================
 
 # 策略组
@@ -73,38 +72,38 @@ proxy-groups:
 # 规则指向
 rules:
   # 广告
-  - GEOSITE,    category-ads-all,  广告节点
+  - GEOSITE,  category-ads-all,  广告节点
   # 局域网
-  - GEOSITE,    private,           DIRECT
-  - GEOIP,      private,           DIRECT,no-resolve
+  - GEOSITE,  private,         DIRECT
+  - GEOIP,    private,         DIRECT,no-resolve
   # AI
-  - GEOSITE,    category-ai-cn,    DIRECT
-  - GEOSITE,    category-ai-!cn,   AIGC
+  - GEOSITE,  category-ai-cn,  DIRECT
+  - GEOSITE,  category-ai-!cn, AIGC
   # 苹果
-  - GEOSITE,    apple-cn,          DIRECT
-  - RULE-SET,   apple_proxy,       苹果
-  - GEOSITE,    apple,             苹果
-  - GEOIP,      apple,             苹果,no_resolve
+  - GEOSITE,  apple-cn,        DIRECT
+  - RULE-SET, apple_proxy,     苹果
+  - GEOSITE,  apple,           苹果
+  - GEOIP,    apple,           苹果,no_resolve
   # 谷歌
-  - GEOSITE,    google,            谷歌
-  - GEOIP,      google,            谷歌,no_resolve
+  - GEOSITE,  google,          谷歌
+  - GEOIP,    google,          谷歌,no_resolve
   # 电报
-  - GEOSITE,    telegram,          电报
-  - GEOIP,      telegram,          电报,no_resolve
+  - GEOSITE,  telegram,        电报
+  - GEOIP,    telegram,        电报,no_resolve
   # 微软
-  - GEOSITE,    microsoft@cn,      DIRECT
-  - GEOSITE,    microsoft,         微软
+  - GEOSITE,  microsoft@cn,    DIRECT
+  - GEOSITE,  microsoft,       微软
   # cloudflare
-  - GEOSITE,    cloudflare-cn,     DIRECT
-  - GEOSITE,    cloudflare,        代理节点
-  - GEOIP,      cloudflare,        代理节点
+  - GEOSITE,  cloudflare-cn,   DIRECT
+  - GEOSITE,  cloudflare,      代理节点
+  - GEOIP,    cloudflare,      代理节点
   # github
-  - GEOSITE,    github,            代理节点
+  - GEOSITE,  github,          代理节点
   # docker
-  - GEOSITE,    docker,            代理节点
+  - GEOSITE,  docker,          代理节点
   # 国内
-  - GEOSITE,    cn,                 DIRECT
-  - GEOIP,      cn,                 DIRECT,no-resolve
+  - GEOSITE,  cn,              DIRECT
+  - GEOIP,    cn,              DIRECT,no-resolve
   # 其余
   - MATCH,兜底节点
 # 订阅规则
