@@ -72,41 +72,40 @@ proxy-groups:
 # 规则指向
 rules:
   # 个人规则
-  - RULE-SET, PreferDirect,                 DIRECT
-  - RULE-SET, PreferProxy,                  代理节点
+  - RULE-SET, PreferDirect, DIRECT
+  - RULE-SET, PreferProxy,  代理节点
   # 局域网
-  - RULE-SET, Lan,                          DIRECT
+  - RULE-SET, Lan,          DIRECT
   # 广告
-  - RULE-SET, Advertising,                  广告节点
+  - RULE-SET, Advertising,  广告节点
   # 智能助手
-  - RULE-SET, AI,                           AIGC
+  - RULE-SET, AI,           AIGC
   # 苹果
-  - RULE-SET, AppleCN,                      DIRECT
-  - RULE-SET, AppleProxy,                   苹果境外
-  - RULE-SET, Apple,                        苹果
+  - RULE-SET, AppleCN,      DIRECT
+  - RULE-SET, AppleProxy,   苹果境外
+  - RULE-SET, Apple,        苹果
   # 谷歌
-  - RULE-SET, YouTube,                      谷歌
-  - RULE-SET, YouTubeMusic,                 谷歌
-  - RULE-SET, Google,                       谷歌
+  - RULE-SET, YouTube,      谷歌
+  - RULE-SET, YouTubeMusic, 谷歌
+  - RULE-SET, Google,       谷歌
   # 电报
-  - RULE-SET, TelegramSG,                   新国节点
-  - RULE-SET, TelegramUS,                   美国节点
-  - RULE-SET, Telegram,                     电报
+  - RULE-SET, TelegramSG,   新国节点
+  - RULE-SET, TelegramUS,   美国节点
+  - RULE-SET, Telegram,     电报
   # 微软
-  - RULE-SET, MicrosoftCN,                  DIRECT
-  - RULE-SET, Microsoft,                    微软
+  - RULE-SET, MicrosoftCN,  DIRECT
+  - RULE-SET, Microsoft,    微软
   #  Cloudflare
-  - RULE-SET, CloudflareCN,                 DIRECT
-  - RULE-SET, Cloudflare,                   代理节点
+  - RULE-SET, CloudflareCN, DIRECT
+  - RULE-SET, Cloudflare,   代理节点
   # GitHub
-  - RULE-SET, GitHub,                       代理节点
+  - RULE-SET, GitHub,       代理节点
   # Docker
-  - RULE-SET, Docker,                       代理节点
+  - RULE-SET, Docker,       代理节点
   # 国内
-  - RULE-SET, ChinaMax_OCD_Domain,          DIRECT
-  - RULE-SET, ChinaMax_OCD_IP,              DIRECT, no-resolve
-  - GEOIP,    CN,                           DIRECT
-  - MATCH,                                  兜底节点
+  - RULE-SET, ChinaMax,     DIRECT
+  - GEOIP,    CN,           DIRECT
+  - MATCH,                  兜底节点
 
 # 订阅规则
 rule-providers:
