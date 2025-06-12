@@ -25,8 +25,6 @@ YamlDomain: &YamlDomain { format: yaml, behavior: domain,    type: http, interva
 ProxyFirst:  &ProxyFirst  { type: select, proxies: [ 代理节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点 ] }
 DirectFirst: &DirectFirst { type: select, proxies: [ DIRECT, 代理节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点 ] }
 
-# 锚点 - 字符串
-CDN_ios_rule_script: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master'
 # ================================ 上面为锚点区 ================================
 
 # 策略组
@@ -74,19 +72,23 @@ proxy-groups:
   - { name: 境外下载, <<: *DirectFirst, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png, include-all-providers: true, include-all: true, filter: *FilterAll }
 # 规则指向
 rules:
+  # 个人规则
   - RULE-SET, PreferDirect,                 DIRECT
   - RULE-SET, PreferProxy,                  代理节点
-  - RULE-SET, Advertising,                  广告节点
+  # 局域网
   - RULE-SET, Lan,                          DIRECT
+  - RULE-SET, Advertising,                  广告节点
+  # 智能助手
   - RULE-SET, AI,                           AIGC
-  - RULE-SET, iCloudChina,                  DIRECT
-  - RULE-SET, ApplePush,                    DIRECT
-  - RULE-SET, AppleSoftwareUpdates,         DIRECT
+  # 苹果
+  - RULE-SET, AppleCN,                      DIRECT
   - RULE-SET, AppleProxy,                   苹果境外
   - RULE-SET, Apple,                        苹果
+  # 谷歌
   - RULE-SET, YouTube,                      谷歌
   - RULE-SET, YouTubeMusic,                 谷歌
   - RULE-SET, Google,                       谷歌
+  # 电报
   - RULE-SET, TelegramSG,                   新国节点
   - RULE-SET, TelegramUS,                   美国节点
   - RULE-SET, Telegram,                     电报
@@ -108,16 +110,17 @@ rule-providers:
   # 个人规则
   PreferDirect:             { <<: *YamlClass, path: './rules/PreferDirect.yaml',              url: 'https://github.com/lizhian/rule-override/raw/refs/heads/main/clash/PreferDirect.yaml' }
   PreferProxy:              { <<: *YamlClass, path: './rules/PreferProxy.yaml',               url: 'https://github.com/lizhian/rule-override/raw/refs/heads/main/clash/PreferProxy.yaml' }
-  # 广告
-  Advertising:              { <<: *YamlClass, path: './rules/Advertising.yaml',               url: CDN_ios_rule_script+'/rule/Clash/Advertising/Advertising_Classical.yaml' }
+  # 局域网
   Lan:                      { <<: *YamlClass, path: './rules/Lan.yaml',                       url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml' }
-
+  # 广告
+  Advertising:              { <<: *YamlClass, path: './rules/Advertising.yaml',               url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Advertising/Advertising_Classical.yaml' }
+  # 智能助手
   AI:                       { <<: *YamlClass, path: './rules/AI.yaml',                        url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml' }
-  iCloudChina:              { <<: *YamlClass, path: './rules/iCloudChina.yaml',               url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml' }
-  ApplePush:                { <<: *YamlClass, path: './rules/ApplePush.yaml',                 url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml' }
-  AppleSoftwareUpdates:     { <<: *YamlClass, path: './rules/AppleSoftwareUpdates.yaml',      url: 'https://kelee.one/Tool/Clash/Rule/AppleSoftwareUpdates.yaml' }
-  AppleProxy:               { <<: *YamlClass, path: './rules/AppleProxy.yaml',                url: 'https://rule.kelee.one/Clash/AppleProxy.yaml' }
-  Apple:                    { <<: *YamlClass, path: './rules/Apple.yaml',                     url: 'https://rule.kelee.one/Clash/Apple.yaml' }
+  # 苹果
+  AppleCN:                  { <<: *YamlClass, path: './rules/AppleCN.yaml',                   url: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple-cn.yaml' }
+  AppleProxy:               { <<: *YamlClass, path: './rules/AppleProxy.yaml',                url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleProxy/AppleProxy.yaml' }
+  Apple:                    { <<: *YamlClass, path: './rules/Apple.yaml',                     url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml' }
+  # 谷歌
   YouTube:                  { <<: *YamlClass, path: './rules/YouTube.yaml',                   url: 'https://rule.kelee.one/Clash/YouTube.yaml' }
   YouTubeMusic:             { <<: *YamlClass, path: './rules/YouTubeMusic.yaml',              url: 'https://rule.kelee.one/Clash/YouTubeMusic.yaml' }
   Google:                   { <<: *YamlClass, path: './rules/Google.yaml',                    url: 'https://rule.kelee.one/Clash/Google.yaml' }
