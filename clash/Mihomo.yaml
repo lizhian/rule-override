@@ -120,7 +120,7 @@ rule-providers:
   # 局域网
   Lan:          { <<: *YamlClass, path: './rules/Lan.yaml',          url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml' }
   # 直连公共服务
-  Direct:       { <<: *YamlClass, path: './rules/Lan.yaml',          url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml' }
+  Direct:       { <<: *YamlClass, path: './rules/Direct.yaml',          url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml' }
   # 广告
   #Advertising:  { <<: *YamlClass, path: './rules/Advertising.yaml',  url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Advertising/Advertising_Classical.yaml' }
   # 智能助手
