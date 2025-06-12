@@ -24,6 +24,9 @@ YamlDomain: &YamlDomain { format: yaml, behavior: domain,    type: http, interva
 #ProxyNation: &ProxyNation [ 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点 ]
 ProxyFirst:  &ProxyFirst  { type: select, proxies: [ 代理节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点 ] }
 DirectFirst: &DirectFirst { type: select, proxies: [ DIRECT, 代理节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点 ] }
+
+# 锚点 - 字符串
+CDN_ios_rule_script: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master'
 # ================================ 上面为锚点区 ================================
 
 # 策略组
@@ -73,6 +76,7 @@ proxy-groups:
 rules:
   - RULE-SET, PreferDirect,                 DIRECT
   - RULE-SET, PreferProxy,                  代理节点
+  - RULE-SET, Advertising,                  广告节点
   - RULE-SET, Lan,                          DIRECT
   - RULE-SET, AI,                           AIGC
   - RULE-SET, iCloudChina,                  DIRECT
@@ -101,9 +105,13 @@ rules:
 
 # 订阅规则
 rule-providers:
+  # 个人规则
   PreferDirect:             { <<: *YamlClass, path: './rules/PreferDirect.yaml',              url: 'https://github.com/lizhian/rule-override/raw/refs/heads/main/clash/PreferDirect.yaml' }
   PreferProxy:              { <<: *YamlClass, path: './rules/PreferProxy.yaml',               url: 'https://github.com/lizhian/rule-override/raw/refs/heads/main/clash/PreferProxy.yaml' }
-  Lan:                      { <<: *YamlClass, path: './rules/Lan.yaml',                       url: 'https://rule.kelee.one/Clash/Lan.yaml' }
+  # 广告
+  Advertising:              { <<: *YamlClass, path: './rules/Advertising.yaml',               url: '{{CDN_ios_rule_script}}/rule/Clash/Advertising/Advertising_Classical.yaml' }
+  Lan:                      { <<: *YamlClass, path: './rules/Lan.yaml',                       url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml' }
+
   AI:                       { <<: *YamlClass, path: './rules/AI.yaml',                        url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml' }
   iCloudChina:              { <<: *YamlClass, path: './rules/iCloudChina.yaml',               url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml' }
   ApplePush:                { <<: *YamlClass, path: './rules/ApplePush.yaml',                 url: 'https://kelee.one/Tool/Clash/Rule/ApplePushNotificationService.yaml' }
