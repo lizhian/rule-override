@@ -71,6 +71,8 @@ proxy-groups:
   - {name: 境外下载, <<: *DirectFirst, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png, include-all-providers: true, filter: *FilterAll}
 # 规则指向
 rules:
+  - RULE-SET, PreferDirect,                 DIRECT
+  - RULE-SET, PreferProxy,                  代理节点
   - RULE-SET, Lan,                          DIRECT
   - RULE-SET, AI,                           AIGC
   - RULE-SET, iCloudChina,                  DIRECT
@@ -99,6 +101,8 @@ rules:
 
 # 订阅规则
 rule-providers:
+  PreferDirect:                 {<<: *YamlClass, path: './rules/PreferDirect.yaml',                  url: 'https://github.com/lizhian/rule-override/raw/refs/heads/main/clash/PreferDirect.yaml'}
+  PreferProxy:                  {<<: *YamlClass, path: './rules/PreferProxy.yaml',                   url: 'https://github.com/lizhian/rule-override/raw/refs/heads/main/clash/PreferProxy.yaml'}
   Lan:                          {<<: *YamlClass, path: './rules/Lan.yaml',                           url: 'https://rule.kelee.one/Clash/Lan.yaml'}
   AI:                           {<<: *YamlClass, path: './rules/AI.yaml',                            url: 'https://kelee.one/Tool/Clash/Rule/AI.yaml'}
   iCloudChina:                  {<<: *YamlClass, path: './rules/iCloudChina.yaml',                   url: 'https://kelee.one/Tool/Clash/Rule/iCloudChina.yaml'}

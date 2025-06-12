@@ -1,1 +1,7 @@
 # 个人优先代理
+payload:
+  # 产业互联
+  - IP-CIDR,10.14.31.0/24
+  - IP-CIDR,10.41.17.0/24
+  - IP-CIDR,10.81.17.0/24
+  - DOMAIN,gitlab.uniin.cn
