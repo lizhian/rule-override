@@ -115,8 +115,8 @@ rules:
 # 订阅规则
 rule-providers:
   # 个人规则
-  PreferDirect: { <<: *YamlClass, path: './rules/PreferDirect.yaml', url: 'https://ghproxy.com/https://github.com/lizhian/rule-override/raw/refs/heads/main/clash/PreferDirect.yaml' }
-  PreferProxy:  { <<: *YamlClass, path: './rules/PreferProxy.yaml',  url: 'https://ghproxy.com/https://github.com/lizhian/rule-override/raw/refs/heads/main/clash/PreferProxy.yaml' }
+  PreferDirect: { <<: *YamlClass, path: './rules/PreferDirect.yaml', url: 'https://github.com/lizhian/rule-override/raw/refs/heads/main/clash/PreferDirect.yaml' }
+  PreferProxy:  { <<: *YamlClass, path: './rules/PreferProxy.yaml',  url: 'https://github.com/lizhian/rule-override/raw/refs/heads/main/clash/PreferProxy.yaml' }
   # 局域网
   Lan:          { <<: *YamlClass, path: './rules/Lan.yaml',          url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml' }
   # 直连公共服务
