@@ -155,7 +155,7 @@ rule-providers:
   Epic:         { <<: *YamlClass, path: './rules/Epic.yaml',         url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Epic/Epic.yaml' }
   # 国内
   ChinaMax:     { <<: *YamlClass, path: './rules/ChinaMax.yaml',     url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml' }
-  FakeIP:       { <<: *MrsDomain, path: "./rules/fakeip-filter.mrs", url: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/rules/Domain/fakeip-filter.mrs" }
+  FakeIP:       { <<: *MrsDomain, path: "./rules/FakeIP.mrs", url: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/rules/Domain/fakeip-filter.mrs" }
 
 # 用于下载订阅时指定UA
 global-ua: clash.meta
