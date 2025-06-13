@@ -34,7 +34,7 @@ proxy-groups:
   - { name: 代理节点, type: select, proxies: [ 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点, 手动节点 ], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png }
   - { name: 手动节点, type: select, filter: *FilterAll, include-all-providers: true, include-all: true, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png }
   - { name: 广告节点, type: select, proxies: [ REJECT, DIRECT ], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Adblock.png }
-  - { name: 兜底节点, type: select, proxies: [ DIRECT, 手动节点, 代理节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点 ], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png }
+  - { name: 兜底节点, type: select, proxies: [ 代理节点, DIRECT, 手动节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 新国节点, 美国节点 ], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Final.png }
   # 地区
   - { name: 香港节点, type: select, filter: *FilterHK, include-all-providers: true, include-all: true, proxies: [ ⏱️️香港时延优选, 🚥香港故障转移, 🎛香港负载均衡 ], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png }
   - { name: 台湾节点, type: select, filter: *FilterTW, include-all-providers: true, include-all: true, proxies: [ ⏱️️台湾时延优选, 🚥台湾故障转移, 🎛台湾负载均衡 ], icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png }
