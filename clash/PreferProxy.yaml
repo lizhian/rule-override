@@ -1,3 +1,4 @@
 # 个人优先代理
 payload:
   - DOMAIN-SUFFIX,follow.is
+  - DOMAIN-SUFFIX,v2ex.com
