@@ -93,8 +93,8 @@ rules:
   - RULE-SET, YouTubeMusic, 谷歌
   - RULE-SET, Google,       谷歌
   # 电报
-  - RULE-SET, TelegramSG,   电报
-  - RULE-SET, TelegramUS,   电报
+  # - RULE-SET, TelegramSG,   电报
+  # - RULE-SET, TelegramUS,   电报
   - RULE-SET, Telegram,     电报
   # 微软
   - RULE-SET, MicrosoftCN,  DIRECT
